@@ -38,8 +38,8 @@ try {
         throw new Exception(4);
 
     $response = [
-        "suitable" => true,
-        "msg" => "Idoneo per recupero"
+        'suitable' => true,
+        'msg' => "Idoneo per recupero"
     ];
 
     session_start();
@@ -47,8 +47,8 @@ try {
     $_SESSION["user"] = $user;
 } catch (Exception $e) {
     $response = [
-        "suitable" => false,
-        "error" => intval($e->getMessage())
+        'suitable' => false,
+        'error' => intval($e->getMessage())
     ];
 } finally {
     echo json_encode($response);

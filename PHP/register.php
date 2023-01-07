@@ -42,7 +42,7 @@ try {
 } catch (Exception $e) {
     $response = [
         'sign' => false,
-        'msg' => 'Registrazione fallita! -> '. $e.getMessage(),
+        'msg' => 'Registrazione fallita! -> '. $e->getMessage(),
         'error' => $e->getCode()
     ];
 } finally {

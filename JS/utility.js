@@ -1,10 +1,14 @@
-// function validate(){
-//     user = document.getElementById("usr").value;
-//     pass = document.getElementById("psw").value;
+function parseMillis(millis){
+    min = 0;
+    sec = 0;
 
-//     if(user == "" || pass == ""){
-//         alert("I campi richiesti sono obbligatori");
-//         return false;
-//     }
-// }
+    sec = Math.floor(millis / 1000);
+    dec = Math.ceil((millis / 1000 - sec)*10000);
+    
+    if(sec >= 60){
+        min = Math.floor(sec / 60);
+        sec %= 60;
+    }
 
+    return min + ':' + sec + '.' + dec;
+}

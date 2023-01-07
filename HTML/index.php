@@ -9,7 +9,7 @@
     <script src="../JS/utility.js"></script>
     <style>
         body{
-            min-height: 100vh; /**Relative to 1% of the height of the viewport */
+            min-height: 100vh; /**Relative to 1% of the height of the viewport (schermo)*/
             display: flex;
             flex-direction: column;
         }
@@ -20,6 +20,9 @@
     <title>Index</title>
 </head>
     <body>
+        <div style="width:inherit;height:inherit;">
+            <img src="../img/panel1.JPG" alt="" style="width:10%;height:70%;">
+        </div>
         <div>
             <h1>Chronolet</h1>
             <form id="login">
@@ -46,6 +49,10 @@
             <input type="button" onclick="location.href='../PHP/guestLog.php'" value="Entra come Guest">
         </div>
         
+        <div style="width:inherit;height:inherit;">
+            <img src="../img/panel2.JPG" alt="" style="width:10%;height:70%;">        
+        </div>
+
         <footer>
             <h2>footer title</h2>
             <span>

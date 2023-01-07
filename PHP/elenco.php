@@ -16,26 +16,27 @@
         
             $sql = "SELECT * FROM circuito";
             $set = $pdo->query($sql);
-            if($set->rowCount() < 1){
-                echo $messages["emptyDB"];
-                echo "<input type='button' onclick='location.href=\"menu.php\"' value='Indietro'>";
-                $pdo = null;
-                exit;
-            }
+            if($set->rowCount() < 1)
+                throw new Exception("Sito in manutenzione!");
+            
             echo "<table>";
             echo "<tr><th>Nome</th>
                     <th>Località</th>
-                    <th>Lunghezza</th><tr>";
+                    <th>Lunghezza</th>
+                    </tr>";
             while($record = $set->fetch()){
                 echo "<tr><td>".$record["nome"]."</td>
                         <td>".$record["localita"]."</td>
-                        <td>".$record["lunghezza"]." m"."</td></tr>";
+                        <td>".$record["lunghezza"]." m"."</td>
+                        <td><a href='".$record["urlmaps"]."' target='_blank'><img src='../img/maps.png' alt='Maps' style='width:24px;height:24px;'></a></td>
+                        <td><a href='".$record["urlsito"]."' target='_blank'><img src='../img/website.png' alt='Sito Web' style='width:24px;height:24px;'></a></td>
+                        </tr>";
             }
             echo "</table>";
-            $pdo = null;
         } catch(PDOException $e){
+            echo "<h2>".$e->getMessage()."</h2>";
+        } finally {
             $pdo = null;
-            die($e->getMessage());
         }
     ?>
     <input type="button" onclick="location.href='menu.php'" value="Indietro">
