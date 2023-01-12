@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nuova Sessione</title>
     <style>
-        #best{
+        td#best{
             background-color: rgba(250, 0, 0, 0.5);
             color: white;
         }
@@ -51,7 +51,7 @@
                 echo "</select>";
                 
                 /**
-                 * inviare una richiesta a uno script php che:
+                 * inviare tramite form una richiesta POST a uno script php che:
                  * - calcola i tempi per giro
                  * - scrive nal db i tempi dell'utente
                  * - invia una risposta a questa pagina

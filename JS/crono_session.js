@@ -1,14 +1,14 @@
+let numSessione = 1;
 function avviaSessione(){
     let circuito = document.getElementById("circuito").value;
     let moto = document.getElementById("moto").value;
     let errMsg = document.getElementById("noData");
-    let numSessione = 1;
 
     if(circuito == "Seleziona Circuito" || moto == "Seleziona Moto"){
         errMsg.hidden = false;
         return;
     }
-    
+
     errMsg.hidden = true;
 
     let turni = Math.floor(Math.random()*6 + 1);
@@ -54,9 +54,9 @@ function avviaSessione(){
             for(let k = 0; k < sessione[i][j].length; k++){
                 table.lastChild.appendChild(document.createElement("td"));
                 table.lastChild.lastChild.appendChild(document.createTextNode(parseMillis(sessione[i][j][k])));
+                if(sessione[i][j][0] == best)
+                    table.lastChild.firstChild.setAttribute("id", "best");
             }
-            if(sessione[i][j][0] == best)
-                table.lastChild.setAttribute("id", "best");
         }
     }
     
@@ -66,19 +66,24 @@ function avviaSessione(){
 }
 
 function generateTime(c){
-    let time = new Array();
-    
+    let time = new Array(5);
+    // TODO: Generare settori prima
+    //      sommarli poi nel tempo totale
     switch (c) {
         case "Autodromo dell'Umbria":
-            time[0] = Math.floor(Math.random()*(105000 - 68000) + 68000);
-            time[1] = time[0]/4;
-            time[2] = time[0]/8;
-            time[3] = time[0]/4;
-            time[4] = time[0]*(3/8);
+        //Math.floor(Math.random()*(105000 - 68000) + 68000)    
+            time[0] = 0;
+            time[1] = Math.floor(Math.floor(Math.random()*(105000 - 68000) + 68000)/4);
+            time[2] = Math.floor(Math.floor(Math.random()*(105000 - 68000) + 68000)/8);
+            time[3] = Math.floor(Math.floor(Math.random()*(105000 - 68000) + 68000)/4);
+            time[4] = Math.floor(Math.floor(Math.random()*(105000 - 68000) + 68000)*(3/8));
+            for (let i = 1; i <= 4; i++)
+                time[0] += time[i];
+            
             break;
 
         case "Autodromo Vallelunga":
-            time = Math.floor(Math.random()*(130000 - 95000) + 95000);
+            time[0] = Math.floor(Math.random()*(130000 - 95000) + 95000);
             time[1] = time[0]/3;
             time[2] = time[0]/4;
             time[3] = time[0]/4;
@@ -86,7 +91,7 @@ function generateTime(c){
             break;
 
         case "Cremona Circuit":
-            time = Math.floor(Math.random()*(130000 - 95000) + 95000);
+            time[0] = Math.floor(Math.random()*(130000 - 95000) + 95000);
             time[1] = time[0]/5;
             time[2] = time[0]/4;
             time[3] = time[0]/4;
@@ -94,7 +99,7 @@ function generateTime(c){
             break;
 
         case "Mugello Circuit":
-            time = Math.floor(Math.random()*(145000 - 105000) + 105000);
+            time[0] = Math.floor(Math.random()*(145000 - 105000) + 105000);
             time[1] = time[0]/4;
             time[2] = time[0]/3;
             time[3] = time[0]/8;
@@ -102,7 +107,7 @@ function generateTime(c){
             break;
 
         case "Misano World Circuit":
-            time = Math.floor(Math.random()*(120000 - 92000) + 92000);
+            time[0] = Math.floor(Math.random()*(120000 - 92000) + 92000);
             time[1] = time[0]/4;
             time[2] = time[0]*(2/5);
             time[3] = time[0]*(1/5);

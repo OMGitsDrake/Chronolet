@@ -3,7 +3,7 @@ function parseMillis(millis){
     sec = 0;
 
     sec = Math.floor(millis / 1000);
-    dec = Math.ceil((millis / 1000 - sec)*10000);
+    dec = Math.ceil((millis / 1000 - sec)*1000);
     
     if(sec >= 60){
         min = Math.floor(sec / 60);

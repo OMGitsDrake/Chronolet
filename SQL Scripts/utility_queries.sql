@@ -34,3 +34,8 @@ FROM(
 	GROUP BY pilota, circuito, moto
 ) AS D
 ORDER BY D.circuito;
+
+-- cambio password
+UPDATE utente
+SET `password` = 'foopsw'
+WHERE username = 'Lorenzo';

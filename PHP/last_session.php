@@ -18,12 +18,8 @@
 
                 $sql = "SELECT nome FROM circuito";
                 $set = $pdo->query($sql);
-                if($set->rowCount() < 1){
-                    echo $messages["emptyDB"];
-                    echo "<input type='button' onclick='location.href=\"menu.php\"' value='Indietro'>";
-                    $pdo = null;
-                    exit;
-                }
+                if($set->rowCount() < 1)
+                    throw new Exception(0);
 
                 echo "<form action='last_session.php' method='POST'>";
                 echo "<select name='selezione_circuiti' id='circuito'>";        
@@ -34,6 +30,8 @@
                 echo "</select>";
 
                 echo "<input type='submit' value='Seleziona'>";
+                echo "</form>";
+                // TODO: da fare in asincrono
                 if(isset($_POST["selezione_circuiti"]) && $_POST["selezione_circuiti"] != "Seleziona Circuito"){
                     $sql = "SELECT *
                     FROM tempo 
@@ -47,13 +45,8 @@
                             AND circuito = \"" . $_POST["selezione_circuiti"] ."\"";
 
                     $set = $pdo->query($sql);
-                    if($set->rowCount() < 1){
-                        echo "<h2>Non ci sono ancora dati relativi al circuito selezionato!<br>
-                                Inizia una Sessione cronometrata per vedere i tuoi tempi</h2>";
-                        echo "<input type='button' onclick='location.href=\"menu.php\"' value='Indietro'>";
-                        $pdo = null;
-                        exit;
-                    }
+                    if ($set->rowCount() < 1)
+                        throw new Exception(1);
 
                     echo "<table>";
                     echo "<tr><th>Moto</th>
@@ -75,12 +68,49 @@
                                 <td>".parse_millis($record["t_s4"])."</td></tr>";
                     }
                     echo "</table>";
+                } else {
+                    // TODO: session exception
                 }
-            } catch(PDOException $e){
-                die($e->getMessage());
+            } catch(Exception $e){
+                switch(intval($e->getCode())){
+                    case 0:
+                        echo $messages["emptyDB"];
+                        break;
+                    case 1:
+                        echo "<h2>Non ci sono ancora dati relativi al circuito selezionato!<br>
+                                Inizia una Sessione cronometrata per vedere i tuoi tempi</h2>";
+                        break;
+                    }
+            } finally {
+                $pdo = null;
             }
         ?>
 
         <input type="button" onclick="location.href='menu.php'" value="Indietro">
     </body>
+    <script>
+        const form = document.getElementById("circuitData");
+
+        form.onsubmit = reqData;
+
+        function reqData(event){
+            event.preventDefault();
+
+            let data = new FormData(form);
+            let x = new XMLHttpRequest();
+            x.open("POST", "getCircuitData.php");
+
+            x.onload = () => {
+                const response = JSON.parse(x.response);
+                if(/*ok*/){
+
+                } else {
+
+                }
+            }
+
+            x.onerror = (event) => console.log(event);
+            x.send(data);
+        }
+    </script>
 </html>
