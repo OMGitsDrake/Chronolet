@@ -19,6 +19,67 @@
         return $pdo;
     }
 
+    function generate_time($c){
+        $time = array();
+        
+        switch ($c) {
+            case "Autodromo dell'Umbria":    
+                $time[0] = 0;
+                $time[1] = floor(floor(rand(68000, 105000)/4));
+                $time[2] = floor(floor(rand(68000, 105000)/8));
+                $time[3] = floor(floor(rand(68000, 105000)/4));
+                $time[4] = floor(floor(rand(68000, 105000)*(3/8)));
+                for ($i = 1; $i <= 4; $i++)
+                    $time[0] += $time[$i];
+                
+                break;
+
+            case "Autodromo Vallelunga":
+                $time[0] = 0;
+                $time[1] = floor(floor(rand(98000, 140000))/3);
+                $time[2] = floor(floor(rand(98000, 140000))/4);
+                $time[3] = floor(floor(rand(98000, 140000))/4);
+                $time[4] = floor(floor(rand(98000, 140000))/6);
+                for ($i = 1; $i <= 4; $i++)
+                    $time[0] += $time[$i];
+                break;
+                    
+            case "Cremona Circuit":
+                $time[0] = 0;
+                $time[1] = floor(floor(rand(95000, 130000))/5);
+                $time[2] = floor(floor(rand(95000, 130000))/4);
+                $time[3] = floor(floor(rand(95000, 130000))/4);
+                $time[4] = floor(floor(rand(95000, 130000))*(3/10));
+                for ($i = 1; $i <= 4; $i++)
+                    $time[0] += $time[$i];
+                break;
+
+            case "Mugello Circuit":
+                $time[0] = 0;
+                $time[1] = floor(floor(rand(105000, 145000))/4);
+                $time[2] = floor(floor(rand(105000, 145000))/3);
+                $time[3] = floor(floor(rand(105000, 145000))/8);
+                $time[4] = floor(floor(rand(105000, 145000))*(7/24));
+                for ($i = 1; $i <= 4; $i++)
+                    $time[0] += $time[$i];
+                break;
+
+            case "Misano World Circuit":
+                $time[0] = 0;
+                $time[1] = floor(floor(rand(92000, 120000))/4);
+                $time[2] = floor(floor(rand(92000, 120000))*(2/5));
+                $time[3] = floor(floor(rand(92000, 120000))*(1/5));
+                $time[4] = floor(floor(rand(92000, 120000))*(3/20));
+                for ($i = 1; $i <= 4; $i++)
+                    $time[0] += $time[$i];
+                break;
+
+            default:
+                return -1;
+        }
+        return $time;
+    }
+
     function parse_millis($millis){
         $min = 0;
         $sec = 0;

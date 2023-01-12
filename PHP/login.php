@@ -13,12 +13,12 @@
         $user = $_POST["user"];
         $psw = $_POST["pswd"];
 
-        if(isset($_POST["keep"])){
-            // remember me for 1 week
-            $exp = time() + 7*(60*60*24);
-            $path = "localhost/Progetto/";
-            setcookie("username", $user, $exp, $path);
-        }
+        // if(isset($_POST["keep"])){
+        //     // remember me for 1 week
+        //     $exp = time() + 7*(60*60*24);
+        //     $path = "localhost/Progetto/";
+        //     setcookie("username", $user, $exp, $path);
+        // }
         
         $sql = "SELECT `password` FROM utente WHERE username = \"". $user ."\"";
         $record = $pdo->query($sql);

@@ -83,7 +83,7 @@
 
                         const heads = new Array(
                             "Circuito",
-                            "Tempo"
+                            "Miglior Tempo"
                         )
                         table.appendChild(document.createElement("tr"));
                         heads.forEach(e => {
