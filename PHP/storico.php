@@ -38,6 +38,8 @@
                                 AND circuito = \"$circuiti[$i]\"
                             ORDER BY `data`, circuito";
                     $set = $pdo->query($sql);
+                    if ($set->rowCount() < 1)
+                        continue;
                     echo "<table>";
                     echo "<caption>$circuiti[$i]</caption>";
                     echo "<tr>

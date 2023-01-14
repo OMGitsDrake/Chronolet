@@ -31,6 +31,8 @@
                     FROM circuito C
                     GROUP BY C.nome";
             $res = $pdo->query($sql);
+            if ($res->rowCount() < 1)
+                throw new Exception;
             $i = 0;
             while($r = $res->fetch()){
                 $circuiti[$i] = $r['nome'];
@@ -48,7 +50,7 @@
                         WHERE D.circuito = \"$circuiti[$i]\"";
                 $set = $pdo->query($sql);
                 if($set->rowCount() < 1)
-                    throw new Exception;
+                    continue;
 
                 echo "<table>";
                 echo "<caption><h3>$circuiti[$i]</h3></caption>";
