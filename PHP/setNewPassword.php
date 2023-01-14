@@ -49,50 +49,50 @@
         <p class="err" id="badAnswer" hidden>La tua risposta non &egrave; corretta!<br>Riprova</p>
         <p class="err" id="badPsw" hidden>Le due password non coincidono!</p>
         </fieldset>
-    <script>
-        const form = document.getElementById("reset");
+        <script>
+            const form = document.getElementById("reset");
 
-        form.onsubmit = reset;
+            form.onsubmit = reset;
 
-        function reset(event){
-            event.preventDefault();
+            function reset(event){
+                event.preventDefault();
 
-            let data = new FormData(form);
-                let x = new XMLHttpRequest();
-                x.open("POST", "../PHP/passwordValidate.php");
-                x.onload = () => {
-                    console.log(x.response);
-                    const response = JSON.parse(x.response);
-                    if (response["ok"] === true) {
-                        const form = document.getElementById("reset");
-                        const succDiv = document.getElementById("resetOk");
-                        const errors = document.getElementsByClassName("err");
-                        console.log(errors);
-                        form.hidden = true;
-                        succDiv.hidden = false;
-                        for(let e of errors)
-                            e.hidden = true;
-                    } else {
-                        console.log(response);
-                        let errMsg = "";
-                        switch(response["err"]){
-                            case 1:
-                                errMsg = document.getElementById("badAnswer");
-                                errMsg.hidden = false;
-                                break;
-                            case 2:
-                                errMsg = document.getElementById("badPsw");
-                                errMsg.hidden = false;
-                                break;
-                            default:
-                                break;
+                let data = new FormData(form);
+                    let x = new XMLHttpRequest();
+                    x.open("POST", "../PHP/passwordValidate.php");
+                    x.onload = () => {
+                        console.log(x.response);
+                        const response = JSON.parse(x.response);
+                        if (response["ok"] === true) {
+                            const form = document.getElementById("reset");
+                            const succDiv = document.getElementById("resetOk");
+                            const errors = document.getElementsByClassName("err");
+                            console.log(errors);
+                            form.hidden = true;
+                            succDiv.hidden = false;
+                            for(let e of errors)
+                                e.hidden = true;
+                        } else {
+                            console.log(response);
+                            let errMsg = "";
+                            switch(response["err"]){
+                                case 1:
+                                    errMsg = document.getElementById("badAnswer");
+                                    errMsg.hidden = false;
+                                    break;
+                                case 2:
+                                    errMsg = document.getElementById("badPsw");
+                                    errMsg.hidden = false;
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
-                    }
-                };
+                    };
 
-                x.onerror = (event) => console.log(event);
-                x.send(data);
-        }
-    </script>
+                    x.onerror = (event) => console.log(event);
+                    x.send(data);
+            }
+        </script>
     </body>
 </html>

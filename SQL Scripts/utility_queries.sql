@@ -1,5 +1,5 @@
 -- ultima sessione
-SELECT *
+SELECT moto, t_lap, t_s1, t_s2, t_s3, t_s4 -- circuito
 FROM tempo 
 WHERE `data` >= ALL(
 			SELECT `data`
@@ -9,8 +9,14 @@ WHERE `data` >= ALL(
         )
         AND pilota = 'Lorenzo'
 		AND circuito = 'Mugello Circuit'
+        -- limit 1
         ;
-            
+        
+SELECT max(`data`) AS last_date
+FROM tempo
+WHERE pilota = "Lorenzo"
+AND circuito = "Autodromo dell'Umbria";
+
 -- migliori tempi di un utente per circuito e moto
 SELECT moto, circuito, MIN(t_lap) AS best_lap
 FROM tempo

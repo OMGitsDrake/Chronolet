@@ -59,19 +59,12 @@ function avviaSessione(){
             }
         }
     }
-    
-    const save = document.getElementById("save");
-    if(save.hidden)
-        save.hidden = false;
 }
 
 function generateTime(c){
     let time = new Array(5);
-    // TODO: Generare settori prima
-    //      sommarli poi nel tempo totale
     switch (c) {
-        case "Autodromo dell'Umbria":
-        //Math.floor(Math.random()*(105000 - 68000) + 68000)    
+        case "Autodromo dell'Umbria":    
             time[0] = 0;
             time[1] = Math.floor(Math.floor(Math.random()*(105000 - 68000) + 68000)/4);
             time[2] = Math.floor(Math.floor(Math.random()*(105000 - 68000) + 68000)/8);
@@ -83,35 +76,43 @@ function generateTime(c){
             break;
 
         case "Autodromo Vallelunga":
-            time[0] = Math.floor(Math.random()*(130000 - 95000) + 95000);
-            time[1] = time[0]/3;
-            time[2] = time[0]/4;
-            time[3] = time[0]/4;
-            time[4] = time[0]/6;
+            time[0] = 0;
+            time[1] = Math.floor(Math.floor(Math.random()*(140000 - 98000) + 98000)/3);
+            time[2] = Math.floor(Math.floor(Math.random()*(140000 - 98000) + 98000)/4);
+            time[3] = Math.floor(Math.floor(Math.random()*(140000 - 98000) + 98000)/4);
+            time[4] = Math.floor(Math.floor(Math.random()*(140000 - 98000) + 98000)/6);
+            for (let i = 1; i <= 4; i++)
+                time[0] += time[i];
             break;
-
+                
         case "Cremona Circuit":
-            time[0] = Math.floor(Math.random()*(130000 - 95000) + 95000);
-            time[1] = time[0]/5;
-            time[2] = time[0]/4;
-            time[3] = time[0]/4;
-            time[4] = time[0]*(3/10);
+            time[0] = 0;
+            time[1] = Math.floor(Math.floor(Math.random()*(130000 - 95000) + 95000)/5);
+            time[2] = Math.floor(Math.floor(Math.random()*(130000 - 95000) + 95000)/4);
+            time[3] = Math.floor(Math.floor(Math.random()*(130000 - 95000) + 95000)/4);
+            time[4] = Math.floor(Math.floor(Math.random()*(130000 - 95000) + 95000)*(3/10));
+            for (let i = 1; i <= 4; i++)
+                time[0] += time[i];
             break;
 
         case "Mugello Circuit":
-            time[0] = Math.floor(Math.random()*(145000 - 105000) + 105000);
-            time[1] = time[0]/4;
-            time[2] = time[0]/3;
-            time[3] = time[0]/8;
-            time[4] = time[0]*(7/24);
+            time[0] = 0;
+            time[1] = Math.floor(Math.floor(Math.random()*(145000 - 105000) + 105000)/4);
+            time[2] = Math.floor(Math.floor(Math.random()*(145000 - 105000) + 105000)/3);
+            time[3] = Math.floor(Math.floor(Math.random()*(145000 - 105000) + 105000)/8);
+            time[4] = Math.floor(Math.floor(Math.random()*(145000 - 105000) + 105000)*(7/24));
+            for (let i = 1; i <= 4; i++)
+                time[0] += time[i];
             break;
 
         case "Misano World Circuit":
-            time[0] = Math.floor(Math.random()*(120000 - 92000) + 92000);
-            time[1] = time[0]/4;
-            time[2] = time[0]*(2/5);
-            time[3] = time[0]*(1/5);
-            time[4] = time[0]*(3/20);
+            time[0] = 0;
+            time[1] = Math.floor(Math.floor(Math.random()*(120000 - 92000) + 92000)/4);
+            time[2] = Math.floor(Math.floor(Math.random()*(120000 - 92000) + 92000)*(2/5));
+            time[3] = Math.floor(Math.floor(Math.random()*(120000 - 92000) + 92000)*(1/5));
+            time[4] = Math.floor(Math.floor(Math.random()*(120000 - 92000) + 92000)*(3/20));
+            for (let i = 1; i <= 4; i++)
+                time[0] += time[i];
             break;
 
         default:

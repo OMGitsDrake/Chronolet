@@ -72,7 +72,7 @@
         </form>
         <div id="errDiv">
             <p class="err" id="noData" hidden>Entrambi i campi richiesti sono obbligatori!</p>
-            <p class="err" id="noData" hidden>Spiacenti, il server &egrave; in manutenzione!</p>
+            <p class="err" id="serverErr" hidden>Spiacenti, il server &egrave; in manutenzione!</p>
         </div>
         </fieldset>
         <table id="res">
@@ -88,7 +88,6 @@
             </tr>
         </table>
         <input type="button" onclick="location.href='menu.php'" value="Indietro">
-    </body>
         <script>
             const form = document.getElementById("sessionForm");
             form.onsubmit = reqSession;
@@ -138,9 +137,9 @@
                             );
                         // stampa header della tabella
                         table.appendChild(document.createElement("tr"));
-                        table.lastChild.appendChild(document.createTextNode("Moto: " + moto));
-                        table.appendChild(document.createElement("tr"));
                         table.lastChild.appendChild(document.createTextNode("Turno n. " + currentTurn++));
+                        table.appendChild(document.createElement("tr"));
+                        table.lastChild.appendChild(document.createTextNode("Moto: " + moto));
                         table.appendChild(document.createElement("tr"));
                         for(let i = 0; i < heads.length; i++){
                             table.lastChild.appendChild(document.createElement("th"));
@@ -209,4 +208,5 @@
                 return min + ':' + sec + '.' + dec;
             }
         </script>
+    </body>
 </html>
