@@ -17,7 +17,7 @@ try{
     $pdo = connect();
     $query = "SELECT circuito, time_format(sec_to_time(min(t_lap)/1000), '%i:%s:%f') AS best
                 FROM tempo
-                WHERE pilota = '".$user."'
+                WHERE pilota = \"$user\"
                 GROUP BY circuito";
     $record = $pdo->query($query);
     

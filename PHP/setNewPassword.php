@@ -16,9 +16,10 @@
 
             $pdo = connect();
 
+            $user = $_SESSION["user"];
             $query = "SELECT domanda
                         FROM utente
-                        WHERE username = '".$_SESSION["user"]."'";
+                        WHERE username = \"$user\"";
             $record = $pdo->query($query);
             $r = $record->fetch();
 

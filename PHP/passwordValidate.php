@@ -13,7 +13,7 @@
 
         $query = "SELECT risposta
                     FROM utente
-                    WHERE username = '".$user."'";
+                    WHERE username = \"$user\"";
         $record = $pdo->query($query);
         $r = $record->fetch();
 

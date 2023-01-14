@@ -16,6 +16,8 @@
             }
 
             try {
+                $user = $_SESSION["user"];
+
                 $pdo = connect();
 
                 $sql = "SELECT C.nome
@@ -28,16 +30,16 @@
                     $i++;
                 }
 
-                echo "<h2>Storico tempi di ". $_SESSION["user"] ."</h2>";
+                echo "<h2>Storico tempi di $user</h2>";
                 for ($i = 0; $i < count($circuiti); $i++){
                     $sql = "SELECT moto, `data`, t_lap, t_s1, t_s2, t_s3, t_s4 
                             FROM tempo
-                            WHERE pilota = \"".$_SESSION['user']."\"
-                                AND circuito = \"".$circuiti[$i]."\"
+                            WHERE pilota = \"$user\"
+                                AND circuito = \"$circuiti[$i]\"
                             ORDER BY `data`, circuito";
                     $set = $pdo->query($sql);
                     echo "<table>";
-                    echo "<caption>".$circuiti[$i]."</caption>";
+                    echo "<caption>$circuiti[$i]</caption>";
                     echo "<tr>
                             <th>Moto</th>
                             <th>Data</th>

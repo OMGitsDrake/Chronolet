@@ -14,123 +14,106 @@
 </head>
     <body>
         <?php
-            // TODO best mensile, annuale
-            require __DIR__ . '\files\utility.php';
-            try{
-                session_start();
-                
-                echo "<h1>Classifiche Piloti</h1>";
-                echo "<h3>Circuito</h3>";
-                
-                $pdo = connect();
-            
+        require __DIR__ . '\files\utility.php';
+        
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
+        try{
+            echo "<h1>Classifiche Piloti</h1>";
+
+            $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
+
+            $pdo = connect();
+        
+            $sql = "SELECT C.nome
+                    FROM circuito C
+                    GROUP BY C.nome";
+            $res = $pdo->query($sql);
+            $i = 0;
+            while($r = $res->fetch()){
+                $circuiti[$i] = $r['nome'];
+                $i++;
+            }
+
+            for ($i = 0; $i < count($circuiti); $i++){
                 $sql = "SELECT RANK() OVER(PARTITION BY D.circuito ORDER BY D.best_lap) AS posizione,
-                        D.moto, D.pilota, D.`data`,  D.circuito, D.best_lap, D.t_s1, D.t_s2, D.t_s3, D.t_s4
+                        D.moto, D.pilota, D.`data`, D.best_lap
                         FROM(
-                            SELECT pilota, `data`, moto, circuito, MIN(t_lap) AS best_lap, t_s1, t_s2, t_s3, t_s4
+                            SELECT pilota, `data`, moto, circuito, MIN(t_lap) AS best_lap
                             FROM tempo
                             GROUP BY pilota, circuito, moto
                         ) AS D
-                        ORDER BY D.circuito";
+                        WHERE D.circuito = \"$circuiti[$i]\"";
                 $set = $pdo->query($sql);
-                if($set->rowCount() < 1){
-                    echo $messages["emptyDB"];
-                    echo "<input type='button' onclick='location.href=\"menu.php\"' value='Indietro'>";
-                    $pdo = null;
-                    exit;
-                }
+                if($set->rowCount() < 1)
+                    throw new Exception;
 
                 echo "<table>";
+                echo "<caption><h3>$circuiti[$i]</h3></caption>";
                 echo "<tr><th>Posizione</th>
                         <th>Moto</th>
                         <th>Pilota</th>
-                        <th>Circuito</th>
                         <th>Data</th>
-                        <th>Tempo</th>
-                        <th>T1</th>
-                        <th>T2</th>
-                        <th>T3</th>
-                        <th>T4</th><tr>";
+                        <th>Tempo</th></tr>";
                 while($record = $set->fetch()){
-                    if(isset($_SESSION["user"]) && $record["pilota"] == $_SESSION["user"])
-                        echo "<tr class='highlight'><td>".$record["posizione"]."</td>
+                    if(!empty($user) && $record["pilota"] == $user)
+                        echo "<tr><td class='highlight'>".$record["posizione"]."</td>
                                 <td>".$record["moto"]."</td>
                                 <td>".$record["pilota"]."</td>
                                 <td>".$record["data"]."</td>
-                                <td>".$record["circuito"]."</td>
-                                <td>".parse_millis($record["best_lap"])."</td>
-                                <td>".parse_millis($record["t_s1"])."</td>
-                                <td>".parse_millis($record["t_s2"])."</td>
-                                <td>".parse_millis($record["t_s3"])."</td>
-                                <td>".parse_millis($record["t_s4"])."</td></tr>";
+                                <td>".parse_millis($record["best_lap"])."</td></tr>";
                     else 
                         echo "<tr><td>".$record["posizione"]."</td>
                                 <td>".$record["moto"]."</td>
                                 <td>".$record["pilota"]."</td>
                                 <td>".$record["data"]."</td>
-                                <td>".$record["circuito"]."</td>
-                                <td>".parse_millis($record["best_lap"])."</td>
-                                <td>".parse_millis($record["t_s1"])."</td>
-                                <td>".parse_millis($record["t_s2"])."</td>
-                                <td>".parse_millis($record["t_s3"])."</td>
-                                <td>".parse_millis($record["t_s4"])."</td></tr>";
+                                <td>".parse_millis($record["best_lap"])."</td></tr>";
                 }
                 echo "</table>";
-
-                echo "<h3>Moto - Circuito</h3>";
-                
-                $sql = "SELECT RANK() OVER(PARTITION BY D.moto, D.circuito ORDER BY D.best_lap) AS posizione, D.moto,
-                        D.pilota, D.`data`,  D.circuito, D.best_lap, D.t_s1, D.t_s2, D.t_s3, D.t_s4
-                        FROM(
-                            SELECT pilota, `data`, moto, circuito, MIN(t_lap) AS best_lap, t_s1, t_s2, t_s3, t_s4
-                            FROM tempo
-                            GROUP BY pilota, circuito, moto
-                        ) AS D
-                        ORDER BY D.circuito";
-                
+                $sql = "SELECT D1.pilota, D1.moto, D1.best_lap
+                        FROM (	
+                            SELECT RANK() OVER(PARTITION BY D.circuito ORDER BY D.best_lap) AS posizione, D.moto, D.pilota, D.`data`, D.best_lap
+                            FROM(
+                                SELECT pilota, `data`, moto, circuito, MIN(t_lap) AS best_lap
+                                FROM tempo
+                                GROUP BY pilota, circuito, moto
+                            ) AS D
+                            WHERE D.circuito = \"$circuiti[$i]\"
+                        ) AS D1
+                        WHERE MONTH(D1.`data`) = MONTH(current_date())
+                        LIMIT 1";
                 $set = $pdo->query($sql);
-
-                echo "<table>";
-                echo "<tr><th>Posizione</th>
-                        <th>Pilota</th>
-                        <th>Moto</th>
-                        <th>Circuito</th>
-                        <th>Data</th>
-                        <th>Tempo</th>
-                        <th>T1</th>
-                        <th>T2</th>
-                        <th>T3</th>
-                        <th>T4</th><tr>";
-                while($record = $set->fetch()){
-                    if(isset($_SESSION["user"]) && $record["pilota"] == $_SESSION["user"])
-                        echo "<tr class='highlight'><td>".$record["posizione"]."</td>
-                                <td>".$record["moto"]."</td>
-                                <td>".$record["pilota"]."</td>
-                                <td>".$record["data"]."</td>
-                                <td>".$record["circuito"]."</td>
-                                <td>".parse_millis($record["best_lap"])."</td>
-                                <td>".parse_millis($record["t_s1"])."</td>
-                                <td>".parse_millis($record["t_s2"])."</td>
-                                <td>".parse_millis($record["t_s3"])."</td>
-                                <td>".parse_millis($record["t_s4"])."</td></tr>";
-                    else
-                        echo "<tr><td>".$record["posizione"]."</td>
-                                <td>".$record["moto"]."</td>
-                                <td>".$record["pilota"]."</td>
-                                <td>".$record["data"]."</td>
-                                <td>".$record["circuito"]."</td>
-                                <td>".parse_millis($record["best_lap"])."</td>
-                                <td>".parse_millis($record["t_s1"])."</td>
-                                <td>".parse_millis($record["t_s2"])."</td>
-                                <td>".parse_millis($record["t_s3"])."</td>
-                                <td>".parse_millis($record["t_s4"])."</td></tr>";
-                }
-                echo "</table>";
-            } catch(Exception $e){
-                die($e->getMessage());
+                $mensile = $set->fetch();
+                echo "<div>";
+                echo "<h3>Best Mensile<h3>";
+                echo "<p>".$mensile['pilota']." - ".$mensile['moto']." - ".parse_millis($mensile['best_lap'])."</p>";
+                
+                $sql = "SELECT D1.pilota, D1.moto, D1.best_lap
+                        FROM (	
+                            SELECT RANK() OVER(PARTITION BY D.circuito ORDER BY D.best_lap) AS posizione, D.moto, D.pilota, D.`data`, D.best_lap
+                            FROM(
+                                SELECT pilota, `data`, moto, circuito, MIN(t_lap) AS best_lap
+                                FROM tempo
+                                GROUP BY pilota, circuito, moto
+                            ) AS D
+                            WHERE D.circuito = \"$circuiti[$i]\"
+                        ) AS D1
+                        WHERE YEAR(D1.`data`) = YEAR(current_date())
+                        LIMIT 1";
+                $set = $pdo->query($sql);
+                $annuale = $set->fetch();
+                echo "<h3>Best Annuale<h3>";
+                echo "<p>".$annuale['pilota']." - ".$annuale['moto']." - ".parse_millis($annuale['best_lap'])."</p>";
+                echo "</div>";
             }
+        } catch(Exception $e){
+            echo $messages['emptyDB'];
+        } finally {
+            $pdo = null;
+        }
         ?>
-
         <input type="button" onclick="location.href='menu.php'" value="Indietro">
     </body>
 </html>

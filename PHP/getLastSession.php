@@ -15,8 +15,8 @@ try {
 
     $sql = "SELECT max(`data`) AS last_date
             FROM tempo
-            WHERE pilota = \"" . $user . "\"
-            AND circuito = \"" . $circuito ."\"";
+            WHERE pilota = \"$user\"
+            AND circuito = \"$circuito\"";
 
     $set = $pdo->query($sql);
 
@@ -27,11 +27,11 @@ try {
             WHERE `data` >= ALL(
                 SELECT `data`
                 FROM tempo
-                WHERE pilota = \"" . $user . "\"
-                AND circuito = \"" . $circuito ."\"
+                WHERE pilota = \"$user\"
+                AND circuito = \"$circuito\"
             )
-            AND pilota = \"" . $user . "\"
-            AND circuito = \"" . $circuito ."\"";
+            AND pilota = \"$user\"
+            AND circuito = \"$circuito\"";
     
     $set = $pdo->query($sql);
     if ($set->rowCount() < 1)

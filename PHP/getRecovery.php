@@ -29,8 +29,8 @@ try {
     
     $query = "SELECT COUNT(*) AS c
                 FROM utente
-                WHERE username = '".$user."'
-                AND email = '".$mail."'";
+                WHERE username = \"$user\"
+                AND email = \"$mail\"";
     $record = $pdo->query($query);
     $r = $record->fetch();
 

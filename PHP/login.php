@@ -20,7 +20,7 @@
         //     setcookie("username", $user, $exp, $path);
         // }
         
-        $sql = "SELECT `password` FROM utente WHERE username = \"". $user ."\"";
+        $sql = "SELECT `password` FROM utente WHERE username = \"$user\"";
         $record = $pdo->query($sql);
         $res = $record->fetch();
         if(!$res){

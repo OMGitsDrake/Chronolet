@@ -24,24 +24,54 @@ WHERE pilota = 'Lorenzo'
 		GROUP BY circuito, moto;
 
 -- classifica per circuito
-SELECT RANK() OVER(PARTITION BY D.circuito ORDER BY D.best_lap) AS posizione, D.moto, D.pilota, D.`data`,  D.circuito, D.best_lap, D.t_s1, D.t_s2, D.t_s3, D.t_s4
+SELECT RANK() OVER(PARTITION BY D.circuito ORDER BY D.best_lap) AS posizione, D.moto, D.pilota, D.`data`, D.best_lap
 FROM(
-	SELECT pilota, `data`, moto, circuito, MIN(t_lap) AS best_lap, t_s1, t_s2, t_s3, t_s4
+	SELECT pilota, `data`, moto, circuito, MIN(t_lap) AS best_lap
 	FROM tempo
 	GROUP BY pilota, circuito, moto
 ) AS D
-ORDER BY D.circuito;
+WHERE D.circuito = "Autodromo dell'Umbria";
 
--- classifica per circuito e moto
-SELECT RANK() OVER(PARTITION BY D.moto, D.circuito ORDER BY D.best_lap) AS posizione, D.moto, D.pilota, D.`data`,  D.circuito, D.best_lap, D.t_s1, D.t_s2, D.t_s3, D.t_s4
-FROM(
-	SELECT pilota, `data`, moto, circuito, MIN(t_lap) AS best_lap, t_s1, t_s2, t_s3, t_s4
-	FROM tempo
-	GROUP BY pilota, circuito, moto
-) AS D
-ORDER BY D.circuito;
+-- best mensile
+SELECT D1.pilota, D1.moto, D1.best_lap
+FROM (	
+	SELECT RANK() OVER(PARTITION BY D.circuito ORDER BY D.best_lap) AS posizione, D.moto, D.pilota, D.`data`, D.best_lap
+	FROM(
+		SELECT pilota, `data`, moto, circuito, MIN(t_lap) AS best_lap
+		FROM tempo
+		GROUP BY pilota, circuito, moto
+	) AS D
+	WHERE D.circuito = "Autodromo dell'Umbria"
+) AS D1
+WHERE MONTH(D1.`data`) = MONTH(current_date())
+LIMIT 1;
+
+-- best annuale
+SELECT D1.pilota, D1.moto, D1.best_lap
+FROM (	
+	SELECT RANK() OVER(PARTITION BY D.circuito ORDER BY D.best_lap) AS posizione, D.moto, D.pilota, D.`data`, D.best_lap
+	FROM(
+		SELECT pilota, `data`, moto, circuito, MIN(t_lap) AS best_lap
+		FROM tempo
+		GROUP BY pilota, circuito, moto
+	) AS D
+	WHERE D.circuito = "Mugello Circuit"
+) AS D1
+WHERE YEAR(D1.`data`) = YEAR(current_date())
+LIMIT 1;
 
 -- cambio password
 UPDATE utente
 SET `password` = 'foopsw'
 WHERE username = 'Lorenzo';
+
+
+
+
+
+
+
+
+
+
+
