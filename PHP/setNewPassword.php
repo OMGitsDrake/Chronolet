@@ -5,7 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../JS/utility.js"></script>
+    <link rel="stylesheet" href="..\CSS\page-forms.css">
     <title>Index</title>
+    <style>
+        body {
+            display: grid;
+            place-items: center;
+        }
+
+        #main{
+            width: 40%;
+            height: 40%;
+        }
+
+        p{
+            color: #803300;
+            font-family: Trebuchet MS;
+            font-style: italic;
+        }
+    </style>
 </head>
     <body>
         <?php
@@ -26,14 +44,14 @@
             echo "<fieldset>";
             echo "<legend><h2>Scegli una nuova password!</h2></legend>";
             echo "<form id='reset'>";
-            echo "<strong>".$r["domanda"]."</strong><br>";
-            echo "<input placeholder='Risposta' type='text' name='answer'><br>";
+            echo "<strong>".$r["domanda"]."</strong>";
+            echo "<input placeholder='Risposta' type='text' name='answer'>";
             echo "<input placeholder='Nuova password' type='password' name='psw'
                 pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}'
-                title='Deve contenere almeno una lettera maiuscola, una minuscola, un numero e almeno 8 caratteri.'><br>";
+                title='Deve contenere almeno una lettera maiuscola, una minuscola, un numero e almeno 8 caratteri.'>";
             echo "<input placeholder='Ripeti password' type='password' name='re_psw'
                 pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}'
-                title='Deve contenere almeno una lettera maiuscola, una minuscola, un numero e almeno 8 caratteri.'><br>";
+                title='Deve contenere almeno una lettera maiuscola, una minuscola, un numero e almeno 8 caratteri.'>";
         } catch(Exception $e){
             echo "<h2>Qualcosa &egrave; andato storto!</h2>";
             echo "<input type='button' onclick='location.href=\"../HTML/index.php\"' value='Indietro'>";
@@ -47,7 +65,7 @@
             <p class="success">Password reimpostata!</p>
             <input type="button" onclick="location.href='../HTML/index.php'" value="Vai alla Login">
         </div>
-        <p class="err" id="badAnswer" hidden>La tua risposta non &egrave; corretta!<br>Riprova</p>
+        <p class="err" id="badAnswer" hidden>La tua risposta non &egrave; corretta!Riprova</p>
         <p class="err" id="badPsw" hidden>Le due password non coincidono!</p>
         </fieldset>
         <script>

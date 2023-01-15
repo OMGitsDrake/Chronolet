@@ -4,23 +4,41 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="..\CSS\page-forms.css">
     <title>Recupero Password</title>
+    <style>
+        body {
+            display: grid;
+            place-items: center;
+        }
+
+        #main{
+            width: 40%;
+            height: 40%;
+        }
+
+        p{
+            color: #803300;
+            font-family: Trebuchet MS;
+            font-style: italic;
+        }
+    </style>
 </head>
 <body>
-    <fieldset>
-        <legend><h2>Recupero Password</h2></legend>
-        <p>Inserire il nome utente e l'indirizzo mail associato a esso</p>
-        <form id="recovery">
-            <input placeholder="Username" type="text" name="user" id="usr"><br>
-            <input placeholder="E-Mail" type="email" name="mail" id="mail"><br>
-            <input type="submit" value="Conferma"><br>
+    <form id="recovery">
+        <fieldset>
+            <legend><h1>Recupero Password</h1></legend>
+            <p>Inserire il nome utente e l'indirizzo mail associato a esso</p>
+            <input placeholder="Username" type="text" name="user" id="usr">
+            <input placeholder="E-Mail" type="email" name="mail" id="mail">
+            <input type="submit" value="Conferma">
             <p class="err" id="userError" hidden>Username non trovato!</p>
             <p class="err" id="mailError" hidden>Indirizzo email non trovato!</p>
             <p class="err" id="noData" hidden>I dati richiesti sono obbligatori!</p>
             <p class="err" id="noPaired" hidden>L'indirizzo mail non corrisponde a nessun Nome Utente!</p>
-        </form>
+        </fieldset>
         <input type="button" onclick="location.href='index.php'" value="Indietro">
-    </fieldset>
+    </form>
     <script>
         const form = document.getElementById("recovery");
 

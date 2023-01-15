@@ -1,0 +1,50 @@
+html {
+    font-family: sans-serif;
+    background-color: #b3d9ff;
+}
+
+input::placeholder{
+    color: antiquewhite;
+}
+
+input:hover{
+    border: 2px solid #cc5200;
+}
+
+[type="text"], [type="password"], [type="email"]{
+    display: block;
+    margin-top: 5%;
+    border: 2px solid blue;
+    border-radius: 5px;
+    background-color: cornflowerblue;
+    font-size: 25px;
+    color: antiquewhite;
+    font-style: oblique;
+}
+
+[type="button"], [type="submit"], select{
+    display: block;
+    margin-top: 5%;
+    border: 2px solid blue;
+    border-radius: 5px; 
+    background-color: rgb(0, 170, 250);
+    font-size: 25px;
+    font-style: oblique;
+    color: darkblue;
+}
+
+fieldset{
+    border: 5px solid #0066ff;
+    border-radius: 10px;
+    background-color: #ffc299;
+}
+
+legend{
+    color: #803300;
+    font-family: Trebuchet MS;
+    font-style: italic;
+}
+
+p.err{
+    color: red;
+}
