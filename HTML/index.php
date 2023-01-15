@@ -4,18 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="../CSS/index.css"> -->
+    <link rel="stylesheet" href="../CSS/index.css">
     <script src="../JS/utility.js"></script>
-    <style>
-        body{
-            min-height: 100vh; /**Relative to 1% of the height of the viewport (schermo)*/
-            display: flex;
-            flex-direction: column;
-        }
-        footer{
-            margin-top: auto;
-        }
-    </style>
     <title>Index</title>
 </head>
     <body>
@@ -27,12 +17,7 @@
             <form id="login">
                 <fieldset>
                     <legend><h2>Accedi</h2></legend>
-                    <?php
-                        if (isset($_COOKIE["username"]))
-                            echo "<input placeholder='Username' type='text' name='user' id='usr' value='".$_COOKIE["username"]."'><br>";
-                        else 
-                            echo "<input placeholder='Username' type='text' name='user' id='usr'><br>";
-                    ?>
+                    <input placeholder="Username" type="text" name="user" id="usr">
                     <input placeholder="Password" type="password" name="pswd" id="psw"><br>
                     <label class="container">
                         Ricordami 
@@ -41,11 +26,11 @@
                     <input type="submit" value="Login"><br>
                     <p class="err" id="loginError" hidden>Credenziali Errate</p>
                     <p class="err" id="noData" hidden>Dati richiesti!</p>
+                    <input type="button" onclick="location.href='../HTML/register.php'" value="Registrati">
+                    <input type="button" onclick="location.href='../HTML/recovery.php'" value="Recupero Password">
+                    <input type="button" onclick="location.href='../PHP/guestLog.php'" value="Entra come Guest">
                 </fieldset>
             </form>
-            <input type="button" onclick="location.href='../HTML/register.php'" value="Registrati">
-            <input type="button" onclick="location.href='../HTML/recovery.php'" value="Recupero Password">
-            <input type="button" onclick="location.href='../PHP/guestLog.php'" value="Entra come Guest">
         </div>
         
         <div style="width:inherit;height:inherit;">

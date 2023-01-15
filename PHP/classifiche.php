@@ -47,7 +47,8 @@
                             FROM tempo
                             GROUP BY pilota, circuito, moto
                         ) AS D
-                        WHERE D.circuito = \"$circuiti[$i]\"";
+                        WHERE D.circuito = \"$circuiti[$i]\"
+                        LIMIT 50";
                 $set = $pdo->query($sql);
                 if($set->rowCount() < 1)
                     continue;
