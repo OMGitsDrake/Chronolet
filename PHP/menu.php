@@ -5,7 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu</title>
+    <link rel="icon" type="image/x-icon" href="..\img\stopwatch.png">
+    <link rel="stylesheet" href="..\CSS\menu.css">
     <script src="../JS/utility.js"></script>
+    <style>
+        h1{
+            font-style: italic;
+            font-family: Trebuchet MS;
+            font-size: 50px;
+            text-decoration: underline #0066ff;
+            color: #803300;
+        }
+
+        body {
+            display: grid;
+            place-items: center;
+        }
+    </style>
 </head>
     <body id="main">
         <?php
@@ -17,13 +33,13 @@
             if(!$_SESSION["logged"]){
                 $_SESSION["user"] = "";
                 echo "<h1>Benvenuto!</h1>";
-                echo $messages["loggedOnly"];
+                echo "<p>".$messages["loggedOnly"]."</p>";
             } else
                 echo "<h1>Benvenuto ".$_SESSION["user"]."!</h1>";
         ?>
 
-        <div class="container">
-            <h3>Menu</h3>
+        <fieldset class="container">
+            <legend><h2>Menu</h2></legend>
             <?php
                 if(!$_SESSION["logged"]){
                     echo "<input disabled type='button' onclick='location.href=\"storico.php\"' value='Storico Tempi'>";
@@ -40,26 +56,26 @@
                     echo "<input type='button' onclick='location.href=\"elenco.php\"' value='Elenco Circuiti'>";
                     echo "<input type='button' onclick='location.href=\"quit.php\"' value='Esci'>";
                 }
-                ?>
-        </div>
+            ?>
+        </fieldset>
         
         <!-- Riassunto visivo -->
-        <div class="floater" id="recap">
+        <div id="recap">
             <fieldset>
                 <legend><h2>Riassunto</h2></legend>
                 <table id="recapTable">
                     
                 </table>    
                 <p class="warn" id="noData" hidden>
-                    Recap non ancora disponibile!<br>
+                    Recap non ancora disponibile!
                     Vai a fare qualche giro in pista.
+                </p>
+                <p class="warn" id="noLogin" hidden>
+                    La funzione di Riassunto è disponibile solo agli utenti Registrati. 
+                    Registrati <a href="../HTML/register.php">qui</a>
                 </p>
                 <p class="err" id="clientErr" hidden>
                     Spiacenti, il sito &egrave; in manutenzione.
-                </p>
-                <p class="warn" id="noLogin" hidden>
-                    La funzione di Riassunto è disponibile solo agli utenti Registrati. <br>
-                    Registrati <a href="../HTML/register.php">qui</a>
                 </p>
             </fieldset>
         </div>

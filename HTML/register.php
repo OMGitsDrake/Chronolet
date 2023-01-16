@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="..\CSS\page-forms.css">
     <title>Registrati</title>
+    <link rel="icon" type="image/x-icon" href="..\img\add-user.png">
     <style>
         body {
             display: grid;
@@ -30,8 +31,12 @@
         <div id="main">
             <form id="sign">
                 <fieldset>
-                    <legend><h1>Registrati</h1></legend>
-                    <input placeholder="Username" type="text" name="user" id="usr">
+                    <legend>
+                        <img style="display: inline;" src="..\img\add-user.png" alt="signup" width="32px" height="32px">
+                        <h1 style="display: inline;">Registrati</h1>
+                    </legend>
+                    <input placeholder="Username" type="text" name="user" id="usr" pattern="^[a-zA-Z0-9]{4,10}$"
+                        title="Deve contenere solamente caratteri alfanumerici!">
                     <input placeholder="E-Mail" type="email" name="mail" id="mail">
                     <input placeholder="Password" type="password" name="pswd" id="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                         title="Deve contenere almeno una lettera maiuscola, una minuscola, un numero e almeno 8 caratteri.">

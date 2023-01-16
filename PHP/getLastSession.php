@@ -6,7 +6,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 try {
-    if(!isset($_POST['selezione_circuiti']) || $_POST['selezione_circuiti'] == "Seleziona Circuito")
+    if(!isset($_POST['selezione_circuiti']) || $_POST['selezione_circuiti'] == "Scegli...")
         throw new Exception(0); // missing data
 
     $user = $_SESSION['user'];

@@ -4,10 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="..\img\stopwatch.png">
     <title>Ultima Sessione</title>
 </head>
     <body>
-        <?php
+        <fieldset>
+            <legend>
+                <img src="..\img\circuit.png" alt="icon" width="32" height="32" style="display: inline">
+                <h2 style="display: inline">Seleziona un circuito</h2>
+            </legend>
+            <?php
             require __DIR__ . '\files\utility.php';
 
             if (session_status() === PHP_SESSION_NONE) {
@@ -20,15 +26,15 @@
                 $set = $pdo->query($sql);
                 if($set->rowCount() < 1)
                     throw new Exception(0);
-
+                
                 echo "<form id='circuitData'>";
                 echo "<select name='selezione_circuiti' id='circuito'>";        
-                echo "<option>Seleziona Circuito</option>";
+                echo "<option>Scegli...</option>";
                 while($record = $set->fetch()){
                     echo "<option>".$record["nome"]."</option>";
                 }
                 echo "</select>";
-
+                
                 echo "<input type='submit' value='Seleziona'>";
                 echo "</form>";
             } catch(Exception $e){
@@ -37,16 +43,23 @@
                 $pdo = null;
             }
         ?>
-        <fieldset id="fieldset" hidden>
-            <legend><h2>Ultima Sessione Registrata</h2></legend>
-            <table>
-                <tbody id="lastSessionTable">
-                </tbody>    
-            </table>
-        </fieldset>
-        <p id="noData" hidden>Devi prima selezionare un circuito!</p>
-        <p id="emptyDB" hidden>Non ci sono dati relativi ai tuoi giri in pista!</p>
+        <p class="err" id="noData" hidden>Devi prima selezionare un circuito!</p>
+        <p class="warn" id="emptyDB" hidden>Non ci sono dati relativi ai tuoi giri in pista!</p>
         <input type="button" onclick="location.href='menu.php'" value="Indietro">
+        </fieldset>
+        <fieldset id="fieldset" hidden>
+            <legend>
+                <img src="..\img\stopwatch.png" alt="icon" width="32" height="32" style="display: inline">
+                <h2 style="display: inline">Ultima Sessione Registrata</h2>
+            </legend>
+        </fieldset>
+        <link rel="stylesheet" href="..\CSS\menu.css">
+        <style>
+            body{
+                display: grid;
+                justify-items: center;
+            }
+        </style>
         <script>
             const form = document.getElementById("circuitData");
 
@@ -66,7 +79,13 @@
                         document.getElementById("noData").hidden = true;
                         document.getElementById("emptyDB").hidden = true;
                         document.getElementById("fieldset").hidden = false;
-                        const table = document.getElementById("lastSessionTable");
+                        if(document.getElementById("lastSessionTable") != undefined){
+                            let t = document.getElementById("lastSessionTable");
+                            t.parentNode.removeChild(t);
+                        }
+                        const table = document.createElement("table");
+                        table.setAttribute("id", "lastSessionTable");
+                        document.getElementById("fieldset").appendChild(table);
                         const caption = document.createElement("caption");
                         table.appendChild(caption);
                         caption.appendChild(document.createTextNode(response['circuit'] + " - " + response['date']));

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../CSS/page-forms.css">
     <script src="../JS/utility.js"></script>
     <title>Index</title>
+    <link rel="icon" type="image/x-icon" href="..\img\stopwatch.png">
     <style>
         h1{
             font-style: italic;
@@ -22,8 +23,6 @@
         }
 
         #main{
-            width: 40%;
-            height: 40%;
             margin-bottom: 30%;
         }
     </style>
@@ -45,7 +44,7 @@
                     </label> -->
                     <input type="submit" value="Login">
                     <p class="err" id="loginError" hidden>Credenziali Errate</p>
-                    <p class="err" id="noData" hidden>Dati richiesti!</p>
+                    <p class="err" id="noData" hidden>Vanno riempiti tutti i campi!</p>
                     <input type="button" onclick="location.href='../PHP/guestLog.php'" value="Entra come Guest">
                 </fieldset>
                 <input type="button" onclick="location.href='../HTML/register.php'" value="Registrati">
@@ -66,6 +65,8 @@
                 
                 x.onload = () => {
                     const response = JSON.parse(x.response);
+                    document.getElementById("noData").hidden = true
+                    document.getElementById("loginError").hidden = true;
 
                     if (response["logged"] === true) {
                         window.location.href = "../PHP/menu.php";

@@ -6,7 +6,7 @@ try {
 
     if(empty($_POST["user"]) || empty($_POST["pswd"]) || empty($_POST["re_pswd"]) || empty($_POST["mail"]) || ($_POST["question"] === "Scegli...")
         || empty($_POST["answer"]))
-            throw new Exception("Dati richiesti!", 2);
+        throw new Exception("Dati richiesti!", 2);
 
     $user = $_POST["user"];
     $pswd = password_hash($_POST["pswd"], PASSWORD_BCRYPT);
