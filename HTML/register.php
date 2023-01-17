@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="..\CSS\page-forms.css">
+    <link rel="stylesheet" href="../CSS/page-forms.css">
     <title>Registrati</title>
-    <link rel="icon" type="image/x-icon" href="..\img\add-user.png">
+    <link rel="icon" type="image/x-icon" href="../img/add-user.png">
     <style>
         body {
             display: grid;
@@ -32,7 +32,7 @@
             <form id="sign">
                 <fieldset>
                     <legend>
-                        <img style="display: inline;" src="..\img\add-user.png" alt="signup" width="32px" height="32px">
+                        <img style="display: inline;" src="../img/add-user.png" alt="signup" width="32" height="32">
                         <h1 style="display: inline;">Registrati</h1>
                     </legend>
                     <input placeholder="Username" type="text" name="user" id="usr" pattern="^[a-zA-Z0-9]{4,10}$"
@@ -43,9 +43,9 @@
                     <input placeholder="Ripeti Password" type="password" name="re_pswd" id="re_psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                         title="Deve contenere almeno una lettera maiuscola, una minuscola, un numero e almeno 8 caratteri.">
                     <label for="question">
-                        <p style="margin: 15px 0 0 0;">Domanda di sicurezza</p>
+                        Domanda di sicurezza
                     </label> 
-                    <select name="question" style="margin-top: 0;">
+                    <select id="question" style="margin-top: 0;">
                         <option>Scegli...</option>
                         <option>Qual&apos; &egrave; il nome del tuo amico immaginario da bambino?</option>
                         <option>Come si chiama il tuo primo amore?</option>

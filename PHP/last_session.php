@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="..\img\stopwatch.png">
+    <link rel="icon" type="image/x-icon" href="../img/stopwatch.png">
     <title>Ultima Sessione</title>
 </head>
     <body>
         <fieldset>
             <legend>
-                <img src="..\img\circuit.png" alt="icon" width="32" height="32" style="display: inline">
+                <img src="../img/circuit.png" alt="icon" width="32" height="32" style="display: inline">
                 <h2 style="display: inline">Seleziona un circuito</h2>
             </legend>
             <?php
@@ -85,9 +85,12 @@
                         const table = document.createElement("table");
                         table.setAttribute("id", "lastSessionTable");
                         document.getElementById("fieldset").appendChild(table);
-                        const caption = document.createElement("caption");
+                        const caption = document.createElement("tr");
+                        caption.appendChild(document.createElement("td"));
+                        caption.lastChild.setAttribute("class", "caption");
+                        caption.lastChild.setAttribute("colspan", "6");
                         table.appendChild(caption);
-                        caption.appendChild(document.createTextNode(response['circuit'] + " - " + response['date']));
+                        caption.lastChild.appendChild(document.createTextNode(response['circuit'] + " - " + response['date']));
 
                         tempi = response['times'];
                         let best = Infinity;

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../CSS/page-forms.css">
     <script src="../JS/utility.js"></script>
     <title>Index</title>
-    <link rel="icon" type="image/x-icon" href="..\img\stopwatch.png">
+    <link rel="icon" type="image/x-icon" href="../img/stopwatch.png">
     <style>
         h1{
             font-style: italic;
@@ -15,11 +15,6 @@
             font-size: 50px;
             text-decoration: underline #0066ff;
             color: #803300;
-        }
-
-        body {
-            display: grid;
-            place-items: center;
         }
 
         #main{
@@ -30,7 +25,7 @@
     <body>
         <div id="main">
             <div>
-                <img src="..\img\stopwatch.png" alt="stopwatch_icon" width="64" height="64" style="display: inline;">
+                <img src="../img/stopwatch.png" alt="stopwatch_icon" width="64" height="64" style="display: inline;">
                 <h1 style="display: inline;">Chronolet</h1>
             </div>
             <form id="login">
@@ -45,7 +40,7 @@
                     <input type="submit" value="Login">
                     <p class="err" id="loginError" hidden>Credenziali Errate</p>
                     <p class="err" id="noData" hidden>Vanno riempiti tutti i campi!</p>
-                    <input type="button" onclick="location.href='../PHP/requests/guestLog.php'" value="Entra come Guest">
+                    <input type="button" onclick="location.href='../PHP/requests/guestLog.php'" value="Entra come Ospite">
                 </fieldset>
                 <input type="button" onclick="location.href='../HTML/register.php'" value="Registrati">
                 <input type="button" onclick="location.href='../HTML/recovery.php'" value="Recupero Password">

@@ -17,9 +17,14 @@
             color: #803300;
         }
 
-        body {
-            display: grid;
-            place-items: center;
+        a{
+            text-decoration: none;
+            font-weight: bolder;
+            color: #0047b3;
+        }
+
+        a:hover{
+            color: #0066ff;
         }
     </style>
 </head>

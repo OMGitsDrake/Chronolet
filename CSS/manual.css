@@ -85,8 +85,14 @@ h2{
     font-size: 30px;
 }
 
-h1, h2{
+h1, h2, h3{
     color: #803300;
     font-family: Trebuchet MS;
     font-style: italic;
+}
+
+p{
+    color: #a14100;
+    font-size: 14px;
+    font-weight: bold;
 }

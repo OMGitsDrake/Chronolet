@@ -8,11 +8,6 @@
     <link rel="icon" type="image/x-icon" href="..\img\circuit.png">
     <title>Elenco Circuiti</title>
     <style>
-        body{
-            display: grid;
-            place-items: center;
-        }
-
         h1{
             color: #803300;
             font-family: Trebuchet MS;

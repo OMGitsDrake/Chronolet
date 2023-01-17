@@ -8,11 +8,6 @@
     <link rel="icon" type="image/x-icon" href="..\img\hot-deal.png">
     <title>Nuova Sessione</title>
     <style>
-        body{
-            display: grid;
-            place-items: center;
-        }
-
         td.best{
             background-color: rgba(0, 255, 110, 0.5);
         }

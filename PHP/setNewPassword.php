@@ -8,11 +8,6 @@
     <link rel="stylesheet" href="..\CSS\page-forms.css">
     <title>Index</title>
     <style>
-        body {
-            display: grid;
-            place-items: center;
-        }
-
         #main{
             width: 40%;
             height: 40%;

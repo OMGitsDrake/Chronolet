@@ -74,6 +74,56 @@
                     $time[0] += $time[$i];
                 break;
 
+            case "Autodromo del Levante":
+                $time[0] = 0;
+                $time[1] = floor(floor(rand(52000, 76000))/4);
+                $time[2] = floor(floor(rand(52000, 76000))*(2/5));
+                $time[3] = floor(floor(rand(52000, 76000))*(1/5));
+                $time[4] = floor(floor(rand(52000, 76000))*(3/20));
+                for ($i = 1; $i <= 4; $i++)
+                    $time[0] += $time[$i];
+                break;
+
+            case "Autodromo di Imola":
+                $time[0] = 0;
+                $time[1] = floor(floor(rand(92000, 136000))/4);
+                $time[2] = floor(floor(rand(92000, 136000))*(2/5));
+                $time[3] = floor(floor(rand(92000, 136000))*(1/5));
+                $time[4] = floor(floor(rand(92000, 136000))*(3/20));
+                for ($i = 1; $i <= 4; $i++)
+                    $time[0] += $time[$i];
+                break;
+
+            case "Autodromo Nazionale Gianni de Luca":
+                $time[0] = 0;
+                $time[1] = floor(floor(rand(44000, 62000))/4);
+                $time[2] = floor(floor(rand(44000, 62000))*(2/5));
+                $time[3] = floor(floor(rand(44000, 62000))*(1/5));
+                $time[4] = floor(floor(rand(44000, 62000))*(3/20));
+                for ($i = 1; $i <= 4; $i++)
+                    $time[0] += $time[$i];
+                break;
+
+            case "Circuito Tazio Nuvolari Cervesina":
+                $time[0] = 0;
+                $time[1] = floor(floor(rand(64000, 92000))/4);
+                $time[2] = floor(floor(rand(64000, 92000))*(2/5));
+                $time[3] = floor(floor(rand(64000, 92000))*(1/5));
+                $time[4] = floor(floor(rand(64000, 92000))*(3/20));
+                for ($i = 1; $i <= 4; $i++)
+                    $time[0] += $time[$i];
+                break;
+
+            case "Motodromo Castelletto di Branduzzo":
+                $time[0] = 0;
+                $time[1] = floor(floor(rand(51000, 85000))/4);
+                $time[2] = floor(floor(rand(51000, 85000))*(2/5));
+                $time[3] = floor(floor(rand(51000, 85000))*(1/5));
+                $time[4] = floor(floor(rand(51000, 85000))*(3/20));
+                for ($i = 1; $i <= 4; $i++)
+                    $time[0] += $time[$i];
+                break;
+            
             default:
                 return -1;
         }

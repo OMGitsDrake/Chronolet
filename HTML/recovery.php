@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="..\CSS\page-forms.css">
+    <link rel="stylesheet" href="../CSS/page-forms.css">
     <title>Recupero Password</title>
-    <link rel="icon" type="image/x-icon" href="..\img\reset-password.png">
+    <link rel="icon" type="image/x-icon" href="../img/reset-password.png">
     <style>
         body {
             display: grid;
@@ -29,7 +29,7 @@
     <form id="recovery">
         <fieldset>
             <legend>
-                <img style="display: inline;" src="..\img\reset-password.png" alt="recovery" width="42px" height="42px">
+                <img style="display: inline;" src="../img/reset-password.png" alt="recovery" width="42" height="42">
                 <h1 style="display: inline;">Recupero Password</h1>
             </legend>
             <p>Inserire il nome utente e l'indirizzo mail associato a esso</p>

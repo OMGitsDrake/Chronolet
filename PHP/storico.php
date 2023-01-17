@@ -47,7 +47,7 @@
                     if ($set->rowCount() < 1)
                         continue;
                     echo "<table class='gridItem'>";
-                    echo "<caption>$circuiti[$i]</caption>";
+                    echo "<tr><td class='caption' colspan='7'>$circuiti[$i]</td></tr>";
                     echo "<tr>
                             <th>Moto</th>
                             <th>Data</th>
@@ -91,7 +91,6 @@
                 column-gap: 10px;
                 row-gap: 10px;
                 grid-template-columns: repeat(2, 1fr);
-                /* grid-template-rows: repeat(3, fr); */
                 align-items: stretch;
                 justify-items: center;
             }

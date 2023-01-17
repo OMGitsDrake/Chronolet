@@ -4,44 +4,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="..\img\podium.png">
-    <link rel="stylesheet" href="..\CSS\menu.css">
+    <link rel="icon" type="image/x-icon" href="../img/podium.png">
+    <link rel="stylesheet" href="../CSS/menu.css">
     <title>Classifiche</title>
     <style>
-        body {
-            display: grid;
-            place-items: center;
-        }
-
         td.highlight {
             background-color: rgba(250, 0, 0, 0.7);
             color: white;
         }
 
-        tr.awardable:nth-child(2) {
+        tr.awardable:nth-child(3) {
             background-color: goldenrod;
             color: chocolate;
         }
 
-        tr.awardable:nth-child(3) {
+        tr.awardable:nth-child(4) {
             background-color: silver;
             color: gray;
         }
         
-        tr.awardable:nth-child(4) {
+        tr.awardable:nth-child(5) {
             background-color: #cc4400;
             color: #802b00;
         }
 
         table{
-            margin-top: 10px;
+            margin-top: 20px;
         }
     </style>
 </head>
     <body>
         <fieldset>
             <legend>
-                <img src="..\img\podium.png" alt="icon" width="64" height="64" style="display: inline;">
+                <img src="../img/podium.png" alt="icon" width="64" height="64" style="display: inline;">
                 <h1 style="display: inline; font-size: 50px;">Classifiche Piloti</h1>
             </legend>
             <input type="button" onclick="location.href='menu.php'" value="Indietro">
@@ -84,7 +79,7 @@
                         continue;
 
                     echo "<table>";
-                    echo "<caption><h3>$circuiti[$i]</h3></caption>";
+                    echo "<tr><td class='caption' colspan='5'><h3>$circuiti[$i]</h3></td></tr>";
                     echo "<tr><th>Posizione</th>
                             <th>Moto</th>
                             <th>Pilota</th>
@@ -92,13 +87,15 @@
                             <th>Tempo</th></tr>";
                     while($record = $set->fetch()){
                         if(!empty($user) && $record["pilota"] == $user)
-                            echo "<tr class='awardable'><td class='highlight'>".$record["posizione"]."</td>
+                            echo "<tr class='awardable'>
+                                    <td class='highlight'>".$record["posizione"]."</td>
                                     <td>".$record["moto"]."</td>
                                     <td>".$record["pilota"]."</td>
                                     <td>".$record["data"]."</td>
                                     <td>".parse_millis($record["best_lap"])."</td></tr>";
                         else 
-                            echo "<tr class='awardable'><td>".$record["posizione"]."</td>
+                            echo "<tr class='awardable'>
+                                    <td>".$record["posizione"]."</td>
                                     <td>".$record["moto"]."</td>
                                     <td>".$record["pilota"]."</td>
                                     <td>".$record["data"]."</td>

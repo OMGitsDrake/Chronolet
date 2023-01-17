@@ -4,14 +4,19 @@ INSERT INTO utente VALUES
     ("Mario", "issoR", "rossi.mario@example.it"),
     ("Gianluca", "idreV", "verdi.gianluca@example.it"),
     ("Luigi", "illaiG", "gialli.luigi@example.it");
-    
+
 TRUNCATE circuito;
 INSERT INTO circuito VALUES
-	("Mugello Circuit", "Barberino del Mugello", 5245),
-    ("Autodromo dell'Umbria", "Magione", 2507),
-    ("Misano World Circuit", "Misano sull'Adriatico", 4226),
-    ("Cremona Circuit", "Cremona", 3702),
-    ("Autodromo Vallelunga", "Campagnano di Roma", 4085);
+	("Mugello Circuit", "Barberino del Mugello FI", 5245, "https://www.mugellocircuit.com/it/", "https://goo.gl/maps/f1JYEAZLLqs4LUnr8"),
+    ("Autodromo dell'Umbria", "Magione PG", 2507, "https://www.autodromomagione.com/", "https://goo.gl/maps/cymoYrFPRtsSogfAA"),
+    ("Misano World Circuit", "Misano sull'Adriatico RN", 4226, "https://www.misanocircuit.com/", "https://goo.gl/maps/YAfTMPTrckiP86S99"),
+    ("Cremona Circuit", "Cremona CR", 3702, "https://cremonacircuit.it/it/", "https://goo.gl/maps/QC8d8f3Edjza8tSSA"),
+    ("Autodromo Vallelunga", "Campagnano di Roma RM", 4085, "https://vallelunga.it/", "https://goo.gl/maps/Fhptph5T9Ddeux536"),
+    ("Autodromo di Imola", "Imola BO", 4936, "https://www.autodromoimola.it/", "https://goo.gl/maps/kwzzqzb9XB3g13tQ6"),
+    ("Motodromo Castelletto di Branduzzo", "Pavia PV", 1900, "https://www.motodromo.it/", "https://goo.gl/maps/PtTXet24bGAnFXmD9"),
+    ("Circuito Tazio Nuvolari Cervesina", "Pavia PV", 2804, "https://www.circuitotazionuvolari.it/", "https://goo.gl/maps/q7GJftJH9meBJq4u8"),
+    ("Autodromo Nazionale Gianni de Luca", "Benevento BN", 1400, "http://www.autodromogiannideluca.it/sito/", "https://goo.gl/maps/mf3JhdDoH8ntCpPq5"),
+    ("Autodromo del Levante", "Bari BA", 1577, "https://www.levantecircuit.com/", "https://goo.gl/maps/SKgWQjfL3c3AMmoM9");
     
 TRUNCATE tempo;
 INSERT INTO tempo(pilota, moto, circuito, `data`, t_lap, t_s1, t_s2, t_s3, t_s4) VALUES
