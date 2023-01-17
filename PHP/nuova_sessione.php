@@ -4,27 +4,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="..\CSS\menu.css">
+    <link rel="icon" type="image/x-icon" href="..\img\hot-deal.png">
     <title>Nuova Sessione</title>
     <style>
+        body{
+            display: grid;
+            place-items: center;
+        }
+
         td.best{
             background-color: rgba(0, 255, 110, 0.5);
         }
         
-        .ideal{
+        tr.ideal{
             background-color: red;
             color: white;
         }
+
         table{
-            border-collapse: collapse;
-        }
-        td {
-            border: 2px solid black;
+            margin-top: 10px;
         }
     </style>
 </head>
     <body>
         <fieldset>
-            <legend><h1>Nuova Sessione Cronometrata</h1></legend>
+            <legend>
+                <img src="..\img\hot-deal.png" alt="icon" width="64" height="64" style="display: inline;">
+                <h1 style="display: inline;">Nuova Sessione Cronometrata</h1>
+            </legend>
             <form id="sessionForm">  
         <?php
             require __DIR__ . '\files\utility.php';
@@ -69,6 +77,7 @@
             }
         ?>
         <input type="submit" value="Avvia">
+        <input type="button" onclick="location.href='menu.php'" value="Indietro">
         </form>
         <div id="errDiv">
             <p class="err" id="noData" hidden>Entrambi i campi richiesti sono obbligatori!</p>
@@ -77,17 +86,6 @@
         </fieldset>
         <table id="res">
         </table>
-        <table id="ideal" class="ideal" hidden>
-            <tr>
-                <td><strong>Tempo Ideale:</strong></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </table>
-        <input type="button" onclick="location.href='menu.php'" value="Indietro">
         <script>
             const form = document.getElementById("sessionForm");
             form.onsubmit = reqSession;
@@ -98,7 +96,7 @@
 
                 let data = new FormData(form);
                 let x = new XMLHttpRequest();
-                x.open("POST", "getNewTimes.php");
+                x.open("POST", "requests/getNewTimes.php");
 
                 x.onload = () => {
                     const response = JSON.parse(x.response);
@@ -137,9 +135,15 @@
                             );
                         // stampa header della tabella
                         table.appendChild(document.createElement("tr"));
-                        table.lastChild.appendChild(document.createTextNode("Turno n. " + currentTurn++));
+                        table.lastChild.appendChild(document.createElement("th"));
+                        table.lastChild.lastChild.setAttribute("colspan", "5");
+                        table.lastChild.lastChild.appendChild(document.createTextNode("Turno n. " + currentTurn++));
+
                         table.appendChild(document.createElement("tr"));
-                        table.lastChild.appendChild(document.createTextNode("Moto: " + moto));
+                        table.lastChild.appendChild(document.createElement("th"));
+                        table.lastChild.lastChild.setAttribute("colspan", "5");
+                        table.lastChild.lastChild.appendChild(document.createTextNode("Moto: " + moto));
+                        
                         table.appendChild(document.createElement("tr"));
                         for(let i = 0; i < heads.length; i++){
                             table.lastChild.appendChild(document.createElement("th"));
@@ -152,7 +156,7 @@
                                 table.lastChild.appendChild(document.createElement("td"));
                                 table.lastChild.lastChild.appendChild(document.createTextNode(parseMillis(tempi[i][j])));
                                 if(tempi[i][0] == best)
-                                table.lastChild.firstChild.setAttribute("class", "best");
+                                    table.lastChild.firstChild.setAttribute("class", "best");
                             }
                             let sectors = table.lastChild.getElementsByTagName("td");
                             for(let k = 0; k < 4; k++){
@@ -169,8 +173,8 @@
                             table.lastChild.appendChild(document.createElement("td"));
                             table.lastChild.lastChild.appendChild(document.createTextNode(parseMillis(bestSectors[i])));
                         }
-                        table.lastChild.appendChild(document.createElement("td"));
-                        table.lastChild.lastChild.appendChild(document.createTextNode("Tempo Ideale"));
+                        // table.lastChild.appendChild(document.createElement("td"));
+                        // table.lastChild.lastChild.appendChild(document.createTextNode("Tempo Ideale"));
                     } else {
                         console.log(response);
                         let errMsg = "";

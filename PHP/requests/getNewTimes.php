@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '\files\utility.php';
+require '..\files\utility.php';
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();

@@ -86,11 +86,6 @@
                 color: #803300;
             }
             
-            body{
-                display: grid;
-                justify-items: center;
-            }
-
             .container{
                 display: grid;
                 column-gap: 10px;

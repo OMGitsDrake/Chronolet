@@ -23,12 +23,16 @@ FROM tempo
 WHERE pilota = 'Lorenzo'
 		GROUP BY circuito, moto;
 
+SELECT pilota, circuito, `data`, moto, MIN(t_lap) AS best_lap
+	FROM tempo
+	GROUP BY pilota, circuito;
+
 -- classifica per circuito
 SELECT RANK() OVER(PARTITION BY D.circuito ORDER BY D.best_lap) AS posizione, D.moto, D.pilota, D.`data`, D.best_lap
 FROM(
 	SELECT pilota, `data`, moto, circuito, MIN(t_lap) AS best_lap
 	FROM tempo
-	GROUP BY pilota, circuito, moto
+	GROUP BY pilota, circuito
 ) AS D
 WHERE D.circuito = "Autodromo dell'Umbria";
 

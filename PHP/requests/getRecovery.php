@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '\files\utility.php';
+require '..\files\utility.php';
 try {
     $pdo = connect();
 

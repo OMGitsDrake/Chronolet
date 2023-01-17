@@ -44,7 +44,7 @@
             echo "<fieldset>";
             echo "<legend><h2>Scegli una nuova password!</h2></legend>";
             echo "<form id='reset'>";
-            echo "<strong>".$r["domanda"]."</strong>";
+            echo "<p><strong>".$r["domanda"]."</strong></p>";
             echo "<input placeholder='Risposta' type='text' name='answer'>";
             echo "<input placeholder='Nuova password' type='password' name='psw'
                 pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}'
@@ -78,7 +78,7 @@
 
                 let data = new FormData(form);
                     let x = new XMLHttpRequest();
-                    x.open("POST", "../PHP/passwordValidate.php");
+                    x.open("POST", "requests/passwordValidate.php");
                     x.onload = () => {
                         console.log(x.response);
                         const response = JSON.parse(x.response);

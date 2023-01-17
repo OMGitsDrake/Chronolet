@@ -1,7 +1,7 @@
 <?php
     $messages = array(
         "emptyDB" => "<h2>Database da aggiornare</h2>",
-        "loggedOnly" => "<div>Le funzioni disabilitate sono disponibili solo agli utenti registrati.</div>",
+        "loggedOnly" => "<p class='warn'>Le funzioni disabilitate sono disponibili solo agli utenti registrati.</p>",
         "userNotFound" => "<h2>Utente non trovato!</h2><br>",
         "loginOk" => "<h2>Login avvenuto con successo!</h2>",
         "badLogin" => "<h2>Credenziali errate!</h2>",

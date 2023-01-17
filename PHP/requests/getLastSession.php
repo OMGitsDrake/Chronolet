@@ -1,13 +1,13 @@
 <?php
-require "files\utility.php";
+require '..\files\utility.php';
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
 try {
-    if(!isset($_POST['selezione_circuiti']) || $_POST['selezione_circuiti'] == "Scegli...")
-        throw new Exception(0); // missing data
+    if($_POST['selezione_circuiti'] == "Scegli...")
+        throw new Exception("circuito non selezionato", 0); // missing data
 
     $user = $_SESSION['user'];
     $circuito = $_POST['selezione_circuiti'];
@@ -35,7 +35,7 @@ try {
     
     $set = $pdo->query($sql);
     if ($set->rowCount() < 1)
-        throw new Exception(1); // emptyDB
+        throw new Exception("Non ci sono dati relativi al circuito selezionato!", 1); // emptyDB
 
     $times = array();
     $i = 0;
@@ -59,7 +59,7 @@ try {
 } catch (Exception $e) {
     $res = [
         'ok' => false,
-        'msg' => "qualcosa e' andato storto",
+        'msg' => $e->getMessage(),
         'err' => $e->getCode()
     ];
 } finally {

@@ -53,7 +53,7 @@
 
             let data = new FormData(form);
                 let x = new XMLHttpRequest();
-                x.open("POST", "../PHP/getRecovery.php");
+                x.open("POST", "../PHP/requests/getRecovery.php");
                 x.onload = () => {
                     console.log(x.response);
                     const response = JSON.parse(x.response);

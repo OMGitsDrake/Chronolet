@@ -3,12 +3,28 @@ html {
     background-color: #b3d9ff;
 }
 
+body{
+    display: grid;
+    place-items: center;
+}
+
 input::placeholder{
     color: antiquewhite;
 }
 
 input:hover{
-    border: 2px solid #cc5200;
+    border: 2px solid white;
+}
+
+input:disabled{
+    display: block;
+    margin-top: 5%;
+    border: 2px solid rgb(51, 51, 51);
+    border-radius: 5px; 
+    background-color: gray;
+    font-size: 25px;
+    font-style: oblique;
+    color: darkslategray;
 }
 
 [type="text"], [type="password"], [type="email"]{
@@ -40,7 +56,7 @@ fieldset{
     /* display: inline-block; */
 }
 
-h2{
+h1, h2{
     color: #803300;
     font-family: Trebuchet MS;
     font-style: italic;
@@ -57,23 +73,21 @@ table{
 caption{
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
-    border: 2px solid #000066;
-    border-bottom: none;
     background-color: #002080;
     color: white;
     font-size: 50px;
 }
 
 th{
-    border-bottom: 2px solid #000066;
+    /* border-bottom: 2px solid #000066; */
     background-color: #002080;
     color: white;
     padding: 7px;
 }
 
 tr:nth-child(odd){
-    background-color: #0033cc;
-    color: white;
+    background-color: #bbccff;
+    color: #002080;
 }
 
 tr:nth-child(even){
@@ -92,6 +106,7 @@ td{
 }
 
 p.err{
+    padding: 5px;
     color: red;
     background-color: white;
     border: 2px solid red;
@@ -100,6 +115,7 @@ p.err{
 }
 
 p.warn{
+    padding: 5px;
     color: orangered;
     background-color: white;
     border: 2px solid orangered;

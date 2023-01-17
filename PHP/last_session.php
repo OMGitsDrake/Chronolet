@@ -44,7 +44,7 @@
             }
         ?>
         <p class="err" id="noData" hidden>Devi prima selezionare un circuito!</p>
-        <p class="warn" id="emptyDB" hidden>Non ci sono dati relativi ai tuoi giri in pista!</p>
+        <p class="warn" id="emptyDB" hidden>Non hai ancora fatto nessun giro!</p>
         <input type="button" onclick="location.href='menu.php'" value="Indietro">
         </fieldset>
         <fieldset id="fieldset" hidden>
@@ -55,9 +55,8 @@
         </fieldset>
         <link rel="stylesheet" href="..\CSS\menu.css">
         <style>
-            body{
-                display: grid;
-                justify-items: center;
+            td.best{
+                background-color: rgba(0, 255, 110, 0.5);
             }
         </style>
         <script>
@@ -70,7 +69,7 @@
 
                 let data = new FormData(form);
                 let x = new XMLHttpRequest();
-                x.open("POST", "getLastSession.php");
+                x.open("POST", "requests/getLastSession.php");
 
                 x.onload = () => {
                     const response = JSON.parse(x.response);
@@ -91,6 +90,12 @@
                         caption.appendChild(document.createTextNode(response['circuit'] + " - " + response['date']));
 
                         tempi = response['times'];
+                        let best = Infinity;
+
+                        // assegnazione miglior tempo
+                        for (let i = 0; i < tempi.length; i++)
+                            best = (tempi[i][1] < best) ? tempi[i][1] : best;
+
                         heads = new Array(
                             "Moto",
                             "Tempo",
@@ -111,12 +116,17 @@
                                 table.lastChild.appendChild(document.createElement("td"));
                                 if(j == 0)
                                     table.lastChild.lastChild.appendChild(document.createTextNode(tempi[i][j]));
-                                else 
+                                else {
                                     table.lastChild.lastChild.appendChild(document.createTextNode(parseMillis(tempi[i][j])));
+                                    if(tempi[i][1] == best)
+                                        table.lastChild.firstChild.setAttribute("class", "best");
+                                }
                             }
                         }
                     } else {
                         console.log(response);
+                        document.getElementById("noData").hidden = true;
+                        document.getElementById("emptyDB").hidden = true;
                         let errMsg = "";
 
                         switch(response['err']){

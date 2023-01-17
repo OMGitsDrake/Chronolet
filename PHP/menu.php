@@ -33,13 +33,16 @@
             if(!$_SESSION["logged"]){
                 $_SESSION["user"] = "";
                 echo "<h1>Benvenuto!</h1>";
-                echo "<p>".$messages["loggedOnly"]."</p>";
+                echo $messages["loggedOnly"];
             } else
                 echo "<h1>Benvenuto ".$_SESSION["user"]."!</h1>";
         ?>
 
         <fieldset class="container">
-            <legend><h2>Menu</h2></legend>
+            <legend>
+                <img src="..\img\menu.png" alt="icon" width="32" height="32" style="display: inline;">
+                <h2 style="display: inline;">Menu</h2>
+            </legend>
             <?php
                 if(!$_SESSION["logged"]){
                     echo "<input disabled type='button' onclick='location.href=\"storico.php\"' value='Storico Tempi'>";
@@ -47,14 +50,14 @@
                     echo "<input type='button' onclick='location.href=\"classifiche.php\"' value='Classifiche'>";
                     echo "<input type='button' onclick='location.href=\"nuova_sessione.php\"' value='Inizia Nuova Sessione'>";
                     echo "<input type='button' onclick='location.href=\"elenco.php\"' value='Elenco Circuiti'>";
-                    echo "<input type='button' onclick='location.href=\"quit.php\"' value='Esci'>";
+                    echo "<input type='button' onclick='location.href=\"requests/quit.php\"' value='Esci'>";
                 } else {
                     echo "<input type='button' onclick='location.href=\"storico.php\"' value='Storico Tempi'>";
                     echo "<input type='button' onclick='location.href=\"last_session.php\"' value='Ultima Sessione'>";
                     echo "<input type='button' onclick='location.href=\"classifiche.php\"' value='Classifiche'>";
                     echo "<input type='button' onclick='location.href=\"nuova_sessione.php\"' value='Inizia Nuova Sessione'>";
                     echo "<input type='button' onclick='location.href=\"elenco.php\"' value='Elenco Circuiti'>";
-                    echo "<input type='button' onclick='location.href=\"quit.php\"' value='Esci'>";
+                    echo "<input type='button' onclick='location.href=\"requests/quit.php\"' value='Esci'>";
                 }
             ?>
         </fieldset>
@@ -62,7 +65,10 @@
         <!-- Riassunto visivo -->
         <div id="recap">
             <fieldset>
-                <legend><h2>Riassunto</h2></legend>
+                <legend>
+                    <img src="..\img\recap.png" alt="icon" width="32" height="32" style="display: inline;">
+                    <h2 style="display: inline;">Riassunto</h2>
+                </legend>
                 <table id="recapTable">
                     
                 </table>    
@@ -88,7 +94,7 @@
                 event.preventDefault();
                 
                 let x = new XMLHttpRequest();
-                x.open("GET", "getRecap.php");
+                x.open("GET", "requests/getRecap.php");
                 x.onload = () => {
                     const response = JSON.parse(x.response);
                     if(response['ok'] === true){

@@ -45,10 +45,11 @@
                     <input type="submit" value="Login">
                     <p class="err" id="loginError" hidden>Credenziali Errate</p>
                     <p class="err" id="noData" hidden>Vanno riempiti tutti i campi!</p>
-                    <input type="button" onclick="location.href='../PHP/guestLog.php'" value="Entra come Guest">
+                    <input type="button" onclick="location.href='../PHP/requests/guestLog.php'" value="Entra come Guest">
                 </fieldset>
                 <input type="button" onclick="location.href='../HTML/register.php'" value="Registrati">
                 <input type="button" onclick="location.href='../HTML/recovery.php'" value="Recupero Password">
+                <input type="button" onclick="location.href='../HTML/manuale.html'" value="Manuale d'uso">
             </form>
         </div>
         <script>
@@ -61,7 +62,7 @@
 
                 let data = new FormData(form);
                 let x = new XMLHttpRequest();
-                x.open("POST", "../PHP/login.php");
+                x.open("POST", "../PHP/requests/login.php");
                 
                 x.onload = () => {
                     const response = JSON.parse(x.response);

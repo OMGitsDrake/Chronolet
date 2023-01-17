@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '\files\utility.php';
+require '..\files\utility.php';
 
 try {
     $pdo = connect();
@@ -20,10 +20,10 @@ try {
 
     $query = "SELECT username FROM utente";
     $record = $pdo->query($query);
-    $r = $record->fetch();
 
-    if(($record->rowCount() >= 1) && ($user === $r["username"]))
-        throw new Exception("Nome utente non disponibile!", 1);
+    while($r = $record->fetch())
+        if(($user === $r["username"]))
+            throw new Exception("Nome utente non disponibile!", 1);
     
     $sql = "INSERT INTO utente VALUES(?, ?, ?, ?, ?)";
     $statement = $pdo->prepare($sql);

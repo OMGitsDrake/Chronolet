@@ -72,11 +72,14 @@
 
                 let data = new FormData(form);
                 let x = new XMLHttpRequest();
-                x.open("POST", "../PHP/register.php");
+                x.open("POST", "../PHP/requests/register.php");
                 x.onload = () => {
                     const response = JSON.parse(x.response);
+                    document.getElementById("pswdError").hidden = true;
+                    document.getElementById("userError").hidden = true;
+                    document.getElementById("noData").hidden = true;
                     if (response["sign"] === true) {
-                        window.location.href = "conferma.php";
+                        window.location.href = "../HTML/index.php";
                     } else {
                         console.log(response);
                         let errMsg = "";
