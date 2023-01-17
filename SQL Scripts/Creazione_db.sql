@@ -1,3 +1,7 @@
+DROP DATABASE IF EXISTS chronolet;
+CREATE DATABASE chronolet;
+USE chronolet;
+
 -- Tabella utenti
 DROP TABLE IF EXISTS utente;
 CREATE TABLE utente(
