@@ -5,9 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu</title>
-    <link rel="icon" type="image/x-icon" href="..\img\stopwatch.png">
-    <link rel="stylesheet" href="..\CSS\menu.css">
-    <script src="../JS/utility.js"></script>
+    <link rel="icon" type="image/x-icon" href="../img/stopwatch.png">
+    <link rel="stylesheet" href="../CSS/menu.css">
     <style>
         h1{
             font-style: italic;
@@ -34,7 +33,9 @@
             
             if(session_status() === PHP_SESSION_NONE)
                 session_start();
-            
+
+            isLogged();
+
             if(!$_SESSION["logged"]){
                 $_SESSION["user"] = "";
                 echo "<h1>Benvenuto!</h1>";
@@ -45,7 +46,7 @@
 
         <fieldset class="container">
             <legend>
-                <img src="..\img\menu.png" alt="icon" width="32" height="32" style="display: inline;">
+                <img src="../img/menu.png" alt="icon" width="32" height="32" style="display: inline;">
                 <h2 style="display: inline;">Menu</h2>
             </legend>
             <?php
@@ -71,7 +72,7 @@
         <div id="recap">
             <fieldset>
                 <legend>
-                    <img src="..\img\recap.png" alt="icon" width="32" height="32" style="display: inline;">
+                    <img src="../img/recap.png" alt="icon" width="32" height="32" style="display: inline;">
                     <h2 style="display: inline;">Riassunto</h2>
                 </legend>
                 <table id="recapTable">

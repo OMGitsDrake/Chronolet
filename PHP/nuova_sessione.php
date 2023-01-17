@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="..\CSS\menu.css">
-    <link rel="icon" type="image/x-icon" href="..\img\hot-deal.png">
+    <link rel="stylesheet" href="../CSS/menu.css">
+    <link rel="icon" type="image/x-icon" href="../img/hot-deal.png">
     <title>Nuova Sessione</title>
     <style>
         td.best{
@@ -25,7 +25,7 @@
     <body>
         <fieldset>
             <legend>
-                <img src="..\img\hot-deal.png" alt="icon" width="64" height="64" style="display: inline;">
+                <img src="../img/hot-deal.png" alt="icon" width="64" height="64" style="display: inline;">
                 <h1 style="display: inline;">Nuova Sessione Cronometrata</h1>
             </legend>
             <form id="sessionForm">  
@@ -168,8 +168,6 @@
                             table.lastChild.appendChild(document.createElement("td"));
                             table.lastChild.lastChild.appendChild(document.createTextNode(parseMillis(bestSectors[i])));
                         }
-                        // table.lastChild.appendChild(document.createElement("td"));
-                        // table.lastChild.lastChild.appendChild(document.createTextNode("Tempo Ideale"));
                     } else {
                         console.log(response);
                         let errMsg = "";

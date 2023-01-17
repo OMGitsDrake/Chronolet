@@ -79,7 +79,7 @@
                         continue;
 
                     echo "<table>";
-                    echo "<tr><td class='caption' colspan='5'><h3>$circuiti[$i]</h3></td></tr>";
+                    echo "<tr><td class='caption' colspan='5'>$circuiti[$i]</td></tr>";
                     echo "<tr><th>Posizione</th>
                             <th>Moto</th>
                             <th>Pilota</th>
@@ -132,9 +132,8 @@
                             LIMIT 1";
                     $set = $pdo->query($sql);
                     $annuale = $set->fetch();
-                    echo "<tr><th colspan='5'><h3>Best Annuale<h3></th></tr>";
+                    echo "<tr><th colspan='5'>Best Annuale</th></tr>";
                     echo "<tr><td colspan='5'>".$annuale['pilota']." - ".$annuale['moto']." - ".parse_millis($annuale['best_lap'])."</td></tr>";
-                    echo "</div>";
                     echo "</table>";
                 }
             } catch(Exception $e){

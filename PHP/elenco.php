@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="..\CSS\menu.css">
-    <link rel="icon" type="image/x-icon" href="..\img\circuit.png">
+    <link rel="stylesheet" href="../CSS/menu.css">
+    <link rel="icon" type="image/x-icon" href="../img/circuit.png">
     <title>Elenco Circuiti</title>
     <style>
         h1{
@@ -19,7 +19,7 @@
 <body>
     <fieldset>
         <legend>
-            <img src="..\img\circuit.png" alt="stopwatch_icon" width="64" height="64" style="display: inline;">
+            <img src="../img/circuit.png" alt="stopwatch_icon" width="64" height="64" style="display: inline;">
             <h1 style="display: inline;">Elenco dei Circuiti Disponibili</h1>
         </legend>
         <?php

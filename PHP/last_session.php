@@ -5,6 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="../img/stopwatch.png">
+    <link rel="stylesheet" href="../CSS/menu.css">
+    <style>
+        td.best{
+            background-color: rgba(0, 255, 110, 0.5);
+        }
+    </style>
     <title>Ultima Sessione</title>
 </head>
     <body>
@@ -19,6 +25,9 @@
             if (session_status() === PHP_SESSION_NONE) {
                 session_start();
             }
+
+            isLogged();
+
             try{
                 $pdo = connect();
 
@@ -49,16 +58,10 @@
         </fieldset>
         <fieldset id="fieldset" hidden>
             <legend>
-                <img src="..\img\stopwatch.png" alt="icon" width="32" height="32" style="display: inline">
+                <img src="../img/stopwatch.png" alt="icon" width="32" height="32" style="display: inline">
                 <h2 style="display: inline">Ultima Sessione Registrata</h2>
             </legend>
         </fieldset>
-        <link rel="stylesheet" href="..\CSS\menu.css">
-        <style>
-            td.best{
-                background-color: rgba(0, 255, 110, 0.5);
-            }
-        </style>
         <script>
             const form = document.getElementById("circuitData");
 

@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../CSS/page-forms.css">
-    <script src="../JS/utility.js"></script>
     <title>Index</title>
     <link rel="icon" type="image/x-icon" href="../img/stopwatch.png">
     <style>
@@ -33,11 +32,7 @@
                     <legend><h2>Accedi</h2></legend>
                     <input placeholder="Username" type="text" name="user" id="usr">
                     <input placeholder="Password" type="password" name="pswd" id="psw">
-                    <!-- <label>
-                        Ricordami 
-                        <input type="checkbox" name="keep" id="keep">
-                    </label> -->
-                    <input type="submit" value="Login">
+                    <input type="submit" value="Accedi">
                     <p class="err" id="loginError" hidden>Credenziali Errate</p>
                     <p class="err" id="noData" hidden>Vanno riempiti tutti i campi!</p>
                     <input type="button" onclick="location.href='../PHP/requests/guestLog.php'" value="Entra come Ospite">

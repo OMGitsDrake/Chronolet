@@ -8,6 +8,16 @@
         "notLogged" => "<h2>&Egrave; necessario autenticarsi</h2>"
     );
 
+    function isLogged(){
+        try{
+            if (!isset($_SESSION['logged']))
+                throw new Exception();
+
+        } catch(Exception $e){
+            header("Location: ../HTML/pageNotFound.html");
+        }
+    }
+
     function connect(){
         $connection = "mysql:host=localhost;dbname=chronolet";
         $user = "root";
