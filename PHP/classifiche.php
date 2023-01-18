@@ -70,7 +70,7 @@
                             FROM(
                                 SELECT pilota, `data`, moto, circuito, MIN(t_lap) AS best_lap
                                 FROM tempo
-                                GROUP BY pilota, circuito /*?, moto ?*/
+                                GROUP BY pilota, circuito
                             ) AS D
                             WHERE D.circuito = \"$circuiti[$i]\"
                             LIMIT 50";
@@ -114,9 +114,11 @@
                             WHERE MONTH(D1.`data`) = MONTH(current_date())
                             LIMIT 1";
                     $set = $pdo->query($sql);
-                    $mensile = $set->fetch();
-                    echo "<tr><th colspan='5'>Best Mensile</th></tr>";
-                    echo "<tr><td colspan='5'>".$mensile['pilota']." - ".$mensile['moto']." - ".parse_millis($mensile['best_lap'])."</td></tr>";
+                    if($set->rowCount() >= 1){
+                        $mensile = $set->fetch();
+                        echo "<tr><th colspan='5'>Best Mensile</th></tr>";
+                        echo "<tr><td colspan='5'>".$mensile['pilota']." - ".$mensile['moto']." - ".parse_millis($mensile['best_lap'])."</td></tr>";
+                    }
                     
                     $sql = "SELECT D1.pilota, D1.moto, D1.best_lap
                             FROM (	
@@ -131,9 +133,11 @@
                             WHERE YEAR(D1.`data`) = YEAR(current_date())
                             LIMIT 1";
                     $set = $pdo->query($sql);
-                    $annuale = $set->fetch();
-                    echo "<tr><th colspan='5'>Best Annuale</th></tr>";
-                    echo "<tr><td colspan='5'>".$annuale['pilota']." - ".$annuale['moto']." - ".parse_millis($annuale['best_lap'])."</td></tr>";
+                    if($set->rowCount() >= 1){
+                        $annuale = $set->fetch();
+                        echo "<tr><th colspan='5'>Best Annuale</th></tr>";
+                        echo "<tr><td colspan='5'>".$annuale['pilota']." - ".$annuale['moto']." - ".parse_millis($annuale['best_lap'])."</td></tr>";
+                    }
                     echo "</table>";
                 }
             } catch(Exception $e){

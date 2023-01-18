@@ -19,10 +19,10 @@
     }
 
     function connect(){
-        $connection = "mysql:host=localhost;dbname=chronolet";
+        $connection = "mysql:host=localhost;dbname=monaci_620826";
         $user = "root";
         $pass = "Cic@da3310";
-    
+        
         $pdo = new PDO($connection, $user, $pass);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
