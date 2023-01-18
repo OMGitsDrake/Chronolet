@@ -41,7 +41,7 @@
 
 ## Manuale ##
 
-- ## Chronolet ##
+- <h1 id="chronolet"> Chronolet </h1>
    1. Il sito &egrave; realizzato con l'intento di ricevere, registrare, analizzare e comparare i tempi dei giri effettuati
         dai piloti di motociclette in alcuni circuiti italiani, un elenco dei quali pu&ograve; essere osservato navigando in esso.
    2. L'utente, *una volta registrato* potr&agrave; attraverso l'uso di un apposito apparecchio posizionato sulla propria moto <br>
@@ -49,7 +49,7 @@
         migliori settori <a href="#settori">(vedere sezione apposita)</a> e calcola sulla base di questi ultimi il tempo ideale per quel pilota.
    3. Un'altra funzionalit&agrave; offerta dal sito &egrave; quella di poter confrontare i propti tempi con quelli degli altri piloti registrati.
    
-- ## Registrazione ##
+- <h1 id="signup"> Registrazione </h1>
    1. La registrazione &egrave; molto semplice, dalla home del sito se si vuole creare un nuovo account ci si dirige nella pagina di registrazione<br>
         utilizzando l'apposito tasto.<br>
         Si riempie il modulo a schermo con i propri dati, ricordando che <i>il nome utente pu&ograve; contentere solamente numeri e lettere</i><br>
@@ -61,7 +61,7 @@
         pu&ograve; accedere al sito in modalit&agrave; "Ospite".<br>
         Questa modalit&agrave; per&ograve; blocca le funzioni che richiedono la creazione di un account.
    
-- ## Utilizzo ##
+- <h1 id="use"> Utilizzo </h1>
     1. Una volta creato l'account, per iniziare una nuova <i>sessione cronometrata</i> si procede nella pagina apposita e dopo aver collegato il<br>
         transponder e selezionato il circuito in cui ci si trova, basta premere su "Avvia" e tornare a controllare quando si &egrave; finito il turno.
     2. Per poter confrontare i propritempi con quelli degli altri piloti, si deve accedere alla pagina delle <i>classifiche</i>, dalla home.<br>
