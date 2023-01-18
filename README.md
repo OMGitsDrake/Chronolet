@@ -4,6 +4,41 @@
 
 ----------
 
+## Indice ##
+<fieldset>
+    <legend>
+        <img src="img/user-guide.png" alt="icon" style="display: inline" width="64" height="64">
+        <h1 style="display: inline">Manuale d'uso</h1>
+    </legend>
+    <div id="main">
+        <h2>Indice</h2>
+        <ul id="index">
+            <li>
+                <a href="#chronolet">Chronolet</a>
+                <ol>
+                    <li>Overview</li>
+                    <li>Descrizione</li>
+                    <li>Funzionalit&agrave;</li>
+                </ol>
+            </li>
+            <li>
+                <a href="#signup">Registrazione</a>
+                <ol>
+                    <li>Creare l'account</li>
+                    <li>Recupero password</li>
+                    <li>Modalit&agrave; Guest</li>
+                </ol>
+            </li>
+            <li>
+                <a href="#use">Utilizzo</a>
+                <ol>
+                    <li>Sessione Cronometrata</li>
+                    <li>Classifiche</li>
+                </ol>
+            </li>
+        </ul>
+</fieldset>
+
 ## Manuale ##
 
 - ## Chronolet ##
