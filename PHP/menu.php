@@ -50,6 +50,7 @@
                 <h2 style="display: inline;">Menu</h2>
             </legend>
             <?php
+                // in base alla modalita' di accesso dell'utente mostro un menu' apposito
                 if(!$_SESSION["logged"]){
                     echo "<input disabled type='button' onclick='location.href=\"storico.php\"' value='Storico Tempi'>";
                     echo "<input disabled type='button' onclick='location.href=\"last_session.php\"' value='Ultima Sessione'>";
@@ -105,10 +106,11 @@
                     const response = JSON.parse(x.response);
                     if(response['ok'] === true){
                         console.log(response['msg']);
+                        // recupero l'aray dei tempi
                         const recap = response['msg'];
                         
                         const table = document.getElementById("recapTable");
-
+                        
                         const heads = new Array(
                             "Circuito",
                             "Miglior Tempo"
@@ -119,12 +121,13 @@
                             table.lastChild.lastChild.appendChild(document.createTextNode(e));
                         });
 
+                        // per ogni circuito aggiungo una riga alla tabella con il nome e il miglior tempo dell'utente
                         for(let i = 0; i < recap["circuito"].length; i++){
                             table.appendChild(document.createElement("tr"));
                             table.lastChild.appendChild(document.createElement("td"));
                             table.lastChild.lastChild.appendChild(document.createTextNode(recap["circuito"][i]));
                             table.lastChild.appendChild(document.createElement("td"));
-                            table.lastChild.lastChild.appendChild(document.createTextNode(recap["best"][i]));
+                            table.lastChild.lastChild.appendChild(document.createTextNode(parseMillis(recap["best"][i])));
                         }
                         
                     } else {
@@ -151,6 +154,27 @@
 
                 x.onerror = (event) => console.log(event);
                 x.send();
+            }
+
+            /**
+             * Converte il tempo passato per argomento da epoch al formato "mm:ss:ddd"
+             * @returns string
+             */
+            function parseMillis(millis){
+                min = 0;
+                sec = 0;
+
+                sec = Math.floor(millis / 1000);
+                dec = Math.ceil((millis / 1000 - sec)*1000);
+                
+                if(sec >= 60){
+                    min = Math.floor(sec / 60);
+                    sec %= 60;
+                }
+
+                sec = (sec < 10) ? "0"+sec : sec;
+                
+                return min + ':' + sec + '.' + dec;
             }
         </script>
     </body>

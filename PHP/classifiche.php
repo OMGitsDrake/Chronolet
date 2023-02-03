@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,11 +8,18 @@
     <link rel="stylesheet" href="../CSS/menu.css">
     <title>Classifiche</title>
     <style>
+        /**
+            La classe seguente evidenzia la riga della tabella in cui e' presente l'utente
+        */
         td.highlight {
             background-color: rgba(250, 0, 0, 0.7);
             color: white;
         }
 
+        /**
+            La classe seguente colora i primi tre posti in classifica
+            con i colori dei primi tre posti del podio (oro, argento, bronzo)
+        */
         tr.awardable:nth-child(3) {
             background-color: goldenrod;
             color: chocolate;
@@ -46,17 +53,21 @@
             if (session_status() === PHP_SESSION_NONE) {
                 session_start();
             }
-            
+
+            isLogged();
+
             try{
                 $user = isset($_SESSION['user']) ? $_SESSION['user'] : "";
 
                 $pdo = connect();
-            
+                
+                // recupero i circuiti
                 $sql = "SELECT C.nome
                         FROM circuito C
                         GROUP BY C.nome";
                 $res = $pdo->query($sql);
                 if ($res->rowCount() < 1)
+                    // DB vuoto
                     throw new Exception;
                 $i = 0;
                 while($r = $res->fetch()){
@@ -64,7 +75,9 @@
                     $i++;
                 }
 
+                // per ogni circuito recupero il record con il miglior tempo (e settori) e il rispettivo pilota
                 for ($i = 0; $i < count($circuiti); $i++){
+                    // classifica piloti
                     $sql = "SELECT RANK() OVER(PARTITION BY D.circuito ORDER BY D.best_lap) AS posizione,
                             D.moto, D.pilota, D.`data`, D.best_lap
                             FROM(
@@ -78,6 +91,7 @@
                     if($set->rowCount() < 1)
                         continue;
 
+                    // stampo a video la tabella
                     echo "<table>";
                     echo "<tr><td class='caption' colspan='5'>$circuiti[$i]</td></tr>";
                     echo "<tr><th>Posizione</th>
@@ -86,7 +100,11 @@
                             <th>Data</th>
                             <th>Tempo</th></tr>";
                     while($record = $set->fetch()){
+                        // le righe della tabella che formano il podio
+                        // verranno colorate grazie alla classe css "awardable"
                         if(!empty($user) && $record["pilota"] == $user)
+                            // se l'utente ha fatto il tempo i-esimo, verra' evidenziato
+                            // per una miglior visualizzazione con la classe csss highlight
                             echo "<tr class='awardable'>
                                     <td class='highlight'>".$record["posizione"]."</td>
                                     <td>".$record["moto"]."</td>
@@ -101,6 +119,7 @@
                                     <td>".$record["data"]."</td>
                                     <td>".parse_millis($record["best_lap"])."</td></tr>";
                     }
+                    // miglior tempo fatto nel mese corrente
                     $sql = "SELECT D1.pilota, D1.moto, D1.best_lap
                             FROM (	
                                 SELECT RANK() OVER(PARTITION BY D.circuito ORDER BY D.best_lap) AS posizione, D.moto, D.pilota, D.`data`, D.best_lap
@@ -120,6 +139,7 @@
                         echo "<tr><td colspan='5'>".$mensile['pilota']." - ".$mensile['moto']." - ".parse_millis($mensile['best_lap'])."</td></tr>";
                     }
                     
+                    // miglior tempo fatto nell'anno corrente
                     $sql = "SELECT D1.pilota, D1.moto, D1.best_lap
                             FROM (	
                                 SELECT RANK() OVER(PARTITION BY D.circuito ORDER BY D.best_lap) AS posizione, D.moto, D.pilota, D.`data`, D.best_lap

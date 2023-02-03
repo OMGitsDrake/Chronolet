@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../JS/utility.js"></script>
     <link rel="stylesheet" href="../CSS/page-forms.css">
     <link rel="icon" type="image/x-icon" href="../img/reset-password.png">
     <title>Reimposta Password</title>
@@ -26,10 +25,13 @@
         require __DIR__ . '\files\utility.php';
 
         try{
-            session_start();
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
 
             $pdo = connect();
 
+            // recupero la domanda da fare all'utente
             $user = $_SESSION["user"];
             $query = "SELECT domanda
                         FROM utente
@@ -37,11 +39,14 @@
             $record = $pdo->query($query);
             $r = $record->fetch();
 
+            // display interfaccia
             echo "<fieldset>";
             echo "<legend><h2>Scegli una nuova password!</h2></legend>";
             echo "<form id='reset'>";
             echo "<p><strong>".$r["domanda"]."</strong></p>";
             echo "<input placeholder='Risposta' type='text' name='answer'>";
+            // le password hanno un formato controllato tramite regex all'interno dell'attributo pattern
+            // come gia' fatto in index.php
             echo "<input placeholder='Nuova password' type='password' name='psw'
                 pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}'
                 title='Deve contenere almeno una lettera maiuscola, una minuscola, un numero e almeno 8 caratteri.'>";
@@ -83,11 +88,15 @@
                             const succDiv = document.getElementById("resetOk");
                             const errors = document.getElementsByClassName("err");
                             console.log(errors);
+                            // nascondo la form
                             form.hidden = true;
+                            // messaggio di successo
                             succDiv.hidden = false;
+                            // nascondo i messaggi di errore
                             for(let e of errors)
                                 e.hidden = true;
                         } else {
+                            // errori
                             console.log(response);
                             let errMsg = "";
                             switch(response["err"]){

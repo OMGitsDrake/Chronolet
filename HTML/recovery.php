@@ -26,7 +26,8 @@
     </style>
 </head>
 <body>
-    <form id="recovery">
+        <!-- Form per recupero -->
+        <form id="recovery">
         <fieldset>
             <legend>
                 <img style="display: inline;" src="../img/reset-password.png" alt="recovery" width="42" height="42">
@@ -36,6 +37,7 @@
             <input placeholder="Username" type="text" name="user" id="usr">
             <input placeholder="E-Mail" type="email" name="mail" id="mail">
             <input type="submit" value="Conferma">
+            <!-- Errori -->
             <p class="err" id="userError" hidden>Username non trovato!</p>
             <p class="err" id="mailError" hidden>Indirizzo email non trovato!</p>
             <p class="err" id="noData" hidden>I dati richiesti sono obbligatori!</p>
@@ -58,8 +60,10 @@
                     console.log(x.response);
                     const response = JSON.parse(x.response);
                     if (response["suitable"] === true) {
+                        // reindirizzamento
                         window.location.href = "../PHP/setNewPassword.php";
                     } else {
+                        // errori
                         console.log(response);
                         let errMsg = "";
                         switch (response["error"]) {

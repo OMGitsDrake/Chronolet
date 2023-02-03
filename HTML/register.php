@@ -31,6 +31,7 @@
         <div id="main">
             <form id="sign">
                 <fieldset>
+                    <!-- Titolo -->
                     <legend>
                         <img style="display: inline;" src="../img/add-user.png" alt="signup" width="32" height="32">
                         <h1 style="display: inline;">Registrati</h1>
@@ -38,6 +39,7 @@
                     <input placeholder="Username" type="text" name="user" id="usr" pattern="^[a-zA-Z0-9]{4,10}$"
                         title="Deve contenere solamente caratteri alfanumerici!">
                     <input placeholder="E-Mail" type="email" name="mail" id="mail">
+                    <!-- La correttezza del formato delle password e' controllato atraverso una regex indicata nell'attributo pattern -->
                     <input placeholder="Password" type="password" name="pswd" id="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                         title="Deve contenere almeno una lettera maiuscola, una minuscola, un numero e almeno 8 caratteri.">
                     <input placeholder="Ripeti Password" type="password" name="re_pswd" id="re_psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
@@ -45,7 +47,7 @@
                     <label for="question">
                         Domanda di sicurezza
                     </label> 
-                    <select id="question" style="margin-top: 0;">
+                    <select name="question" style="margin-top: 0;">
                         <option>Scegli...</option>
                         <option>Qual&apos; &egrave; il nome del tuo amico immaginario da bambino?</option>
                         <option>Come si chiama il tuo primo amore?</option>
@@ -55,6 +57,7 @@
                     </select> 
                     <input placeholder="Risposta" type="text" name="answer">
                     <input type="submit" value="Conferma">
+                    <!-- Errori -->                
                     <p class="err" id="pswdError" hidden>Le password non coincidono!</p>
                     <p class="err" id="userError" hidden>Nome utente non disponibile!</p>
                     <p class="err" id="noData" hidden>Tutti i dati richiesti sono obbligatori!</p>
@@ -79,8 +82,10 @@
                     document.getElementById("userError").hidden = true;
                     document.getElementById("noData").hidden = true;
                     if (response["sign"] === true) {
+                        // reindirizzamento
                         window.location.href = "../HTML/index.php";
                     } else {
+                        // errori
                         console.log(response);
                         let errMsg = "";
                         switch (response["error"]) {

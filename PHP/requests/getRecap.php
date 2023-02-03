@@ -7,7 +7,7 @@ if(session_status() === PHP_SESSION_NONE)
 try{
     if(!isset($_SESSION["user"]))
         throw new Exception("Qualcosa lato client e' andato storto!", 1);
-        
+    // se accedo in modalita' guest visualizzero' un messaggio che mi avverte che la funzione non e' disponibile
     if(empty($_SESSION['user']))
         throw new Exception("Guest!", 2);
 
@@ -15,17 +15,22 @@ try{
     $user = $_SESSION["user"];
 
     $pdo = connect();
-    $query = "SELECT circuito, time_format(sec_to_time(min(t_lap)/1000), '%i:%s:%f') AS best
+    // recupero circuito e miglior tempo
+    $query = "SELECT circuito, min(t_lap) AS best
                 FROM tempo
                 WHERE pilota = \"$user\"
                 GROUP BY circuito";
     $record = $pdo->query($query);
     
     if($record->rowCount() < 1)
+        // se non ho nessun giro registrato lo comunico all'utente
         throw new Exception("Non ci sono abbastanza dati", 0);
 
     $recapArray = array();
     $i = 0;
+    // organizzo il risultato con un array associativo
+    // Circuito:{c1, c2, ..., cn}
+    // Miglior Tempo:{b1, b2, ..., bn}
     while($r = $record->fetch()){
         $recapArray["circuito"][$i] = $r["circuito"];
         $recapArray["best"][$i] = $r["best"];    

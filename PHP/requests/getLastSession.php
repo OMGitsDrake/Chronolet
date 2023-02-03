@@ -7,12 +7,14 @@ if (session_status() === PHP_SESSION_NONE) {
 
 try {
     if($_POST['selezione_circuiti'] == "Scegli...")
-        throw new Exception("circuito non selezionato", 0); // missing data
+        // dait mancanti
+        throw new Exception("circuito non selezionato", 0);
 
     $user = $_SESSION['user'];
     $circuito = $_POST['selezione_circuiti'];
     $pdo = connect();
 
+    // recupero la data
     $sql = "SELECT max(`data`) AS last_date
             FROM tempo
             WHERE pilota = \"$user\"
@@ -22,6 +24,7 @@ try {
 
     $data = $set->fetch();
 
+    // recupero i tempi e la moto
     $sql = "SELECT moto, t_lap, t_s1, t_s2, t_s3, t_s4
             FROM tempo 
             WHERE `data` >= ALL(
@@ -35,7 +38,8 @@ try {
     
     $set = $pdo->query($sql);
     if ($set->rowCount() < 1)
-        throw new Exception("Non ci sono dati relativi al circuito selezionato!", 1); // emptyDB
+        // DB vuoto
+        throw new Exception("Non ci sono dati relativi al circuito selezionato!", 1);
 
     $times = array();
     $i = 0;

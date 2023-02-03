@@ -28,11 +28,13 @@
             try{
                 $pdo = connect();
             
+                // recupero i dati dei circuiti
                 $sql = "SELECT * FROM circuito";
                 $set = $pdo->query($sql);
                 if($set->rowCount() < 1)
                     throw new Exception("Sito in manutenzione!");
                 
+                // inizializzazione tabella
                 echo "<table>";
                 echo "<tr><th>Nome</th>
                         <th>Località</th>
@@ -43,13 +45,15 @@
                     echo "<tr><td>".$record["nome"]."</td>
                             <td>".$record["localita"]."</td>
                             <td>".$record["lunghezza"]." m"."</td>
-                            <td><a href='".$record["urlmaps"]."' target='_blank'><img src='../img/maps.png' alt='Maps' style='width:24px;height:24px;'></a></td>
-                            <td><a href='".$record["urlsito"]."' target='_blank'><img src='../img/website.png' alt='Sito Web' style='width:24px;height:24px;'></a></td>
+                            <td><a href='"/** link alle coordinate google maps */   .$record["urlmaps"]."' target='_blank'><img src='../img/maps.png' alt='Maps' style='width:24px;height:24px;'></a></td>
+                            <td><a href='"/** link al sito del circuito */          .$record["urlsito"]."' target='_blank'><img src='../img/website.png' alt='Sito Web' style='width:24px;height:24px;'></a></td>
                             </tr>";
                 }
                 echo "</table>";
             } catch(PDOException $e){
-                echo "<h2>".$e->getMessage()."</h2>";
+                echo "<h2>".$messages["maintence"]."</h2>";
+            } catch(Exception $e) {
+                echo $e->getMessage();
             } finally {
                 $pdo = null;
             }

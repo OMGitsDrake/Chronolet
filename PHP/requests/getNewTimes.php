@@ -9,6 +9,7 @@ try {
     $pdo = connect();
 
     if($_SESSION['logged'] === false){
+        // se accedo in modalita' ospite
         if ($_POST['selezione_circuito'] === "Seleziona Circuito" || $_POST['selezione_moto'] === "Seleziona Moto")
             throw new Exception("Dati richiesti!", 0);
         $tempi = array();
@@ -16,6 +17,7 @@ try {
         $circuito = $_POST['selezione_circuito'];
         $moto = $_POST['selezione_moto'];
         
+        // per un numero random di giri genero i tempi
         for ($i = 0; $i < $giri; $i++){
             $tempi[$i] = generate_time($circuito);
             if ($tempi[$i] === -1)
@@ -29,6 +31,7 @@ try {
             'msg' => "Tempi Registrati!"
         ];
     } else {
+        // se accedo in modalita' utente registrato
         if ($_POST['selezione_circuito'] === "Seleziona Circuito" || $_POST['selezione_moto'] === "Seleziona Moto")
             throw new Exception("Dati richiesti!", 0);
     
@@ -42,6 +45,7 @@ try {
                 VALUES(?, ?, ?, current_date(), ?, ?, ?, ?, ?)";
     
         for ($i = 0; $i < $giri; $i++){
+            // ad ogni giro inserisco i dati nel DB
             $tempi[$i] = generate_time($circuito);
             if ($tempi[$i] === -1)
                 throw new Exception("Qualcosa e' andato storto!", 1);

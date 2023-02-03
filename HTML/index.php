@@ -23,15 +23,18 @@
 </head>
     <body>
         <div id="main">
+            <!-- Titolo -->
             <div>
                 <img src="../img/stopwatch.png" alt="stopwatch_icon" width="64" height="64" style="display: inline;">
                 <h1 style="display: inline;">Chronolet</h1>
             </div>
+            <!-- Form per login -->
             <form id="login">
                 <fieldset>
                     <legend><h2>Accedi</h2></legend>
                     <input placeholder="Username" type="text" name="user" id="usr">
                     <input placeholder="Password" type="password" name="pswd" id="psw">
+                    <input type="button" value="Mostra Password" id="showPswBtn" onclick="togglePswText()" style="font-size: 15px;">
                     <input type="submit" value="Accedi">
                     <p class="err" id="loginError" hidden>Credenziali Errate</p>
                     <p class="err" id="noData" hidden>Vanno riempiti tutti i campi!</p>
@@ -56,12 +59,15 @@
                 
                 x.onload = () => {
                     const response = JSON.parse(x.response);
+                    // nascondo i messaggi di errore quando ricevo una risposta
                     document.getElementById("noData").hidden = true
                     document.getElementById("loginError").hidden = true;
 
                     if (response["logged"] === true) {
+                        // reindirizzamento
                         window.location.href = "../PHP/menu.php";
                     } else {
+                        // mostro errori a schermo
                         console.log(response);
                         if(response["error"] == 0/*"Dati richiesti!"*/){
                             const errMsg = document.getElementById("noData");
@@ -75,6 +81,22 @@
 
                 x.onerror = (event) => console.log(event);
                 x.send(data);
+            }
+
+            /**
+             * Funzione che mostra il testo della password che si sta inserendo
+             */
+            function togglePswText() {
+                const p = document.getElementById("psw");
+                const b = document.getElementById("showPswBtn");
+                if (p.type === "password"){
+                    p.type = "text";
+                    b.value = "Nascondi Password";
+                }
+                else{
+                    p.type = "password";
+                    b.value = "Mostra Password";
+                }
             }
         </script>
     </body>

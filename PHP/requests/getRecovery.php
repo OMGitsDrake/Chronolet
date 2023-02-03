@@ -3,12 +3,14 @@ require '..\files\utility.php';
 try {
     $pdo = connect();
 
-    if(empty($_POST["user"]) && empty($_POST["mail"]))
+    // se il form non e' completo
+    if(empty($_POST["user"]) || empty($_POST["mail"]))
         throw new Exception(3);
     
     $user = $_POST["user"];
     $mail = $_POST["mail"];
 
+    // verifico che l'username esista nel DB
     $query = "SELECT username
                 FROM utente
                 WHERE username = '".$user."'";
@@ -17,7 +19,7 @@ try {
 
     if(!isset($r["username"]))
         throw new Exception(1);
-    
+    // verifico che la mail esista nel DB    
     $query = "SELECT email
                 FROM utente
                 WHERE email = '".$mail."'";
@@ -27,6 +29,7 @@ try {
     if(!isset($r["email"]))
         throw new Exception(2);
     
+    // verifico che username e email siano associati
     $query = "SELECT COUNT(*) AS c
                 FROM utente
                 WHERE username = \"$user\"
@@ -43,7 +46,7 @@ try {
     ];
 
     session_start();
-
+    // salvo il nome utente in sessione
     $_SESSION["user"] = $user;
 } catch (Exception $e) {
     $response = [

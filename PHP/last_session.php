@@ -31,14 +31,16 @@
             try{
                 $pdo = connect();
 
+                // recupero i nomi dei circuiti
                 $sql = "SELECT nome FROM circuito";
                 $set = $pdo->query($sql);
                 if($set->rowCount() < 1)
-                    throw new Exception(0);
+                    throw new Exception();
                 
                 echo "<form id='circuitData'>";
                 echo "<select name='selezione_circuiti' id='circuito'>";        
                 echo "<option>Scegli...</option>";
+                // inseriti in un menu' a tendina
                 while($record = $set->fetch()){
                     echo "<option>".$record["nome"]."</option>";
                 }
@@ -47,11 +49,12 @@
                 echo "<input type='submit' value='Seleziona'>";
                 echo "</form>";
             } catch(Exception $e){
-                echo $messages["emptyDB"];
+                echo $messages["maintence"];
             } finally {
                 $pdo = null;
             }
         ?>
+        <!-- Messaggi di erore/warning -->
         <p class="err" id="noData" hidden>Devi prima selezionare un circuito!</p>
         <p class="warn" id="emptyDB" hidden>Non hai ancora fatto nessun giro!</p>
         <input type="button" onclick="location.href='menu.php'" value="Indietro">
@@ -78,13 +81,20 @@
                     const response = JSON.parse(x.response);
                     if(response['ok'] === true){
                         console.log(response);
+                        
+                        // nascondo i messaggi di errore
+                        // mostro il fieldset dove comparira' la tabella
                         document.getElementById("noData").hidden = true;
                         document.getElementById("emptyDB").hidden = true;
                         document.getElementById("fieldset").hidden = false;
+
+                        // rimuovo la tabella in caso di una nuova richiesta
                         if(document.getElementById("lastSessionTable") != undefined){
                             let t = document.getElementById("lastSessionTable");
                             t.parentNode.removeChild(t);
                         }
+                        
+                        // imposto la visualizzazione della tabella
                         const table = document.createElement("table");
                         table.setAttribute("id", "lastSessionTable");
                         document.getElementById("fieldset").appendChild(table);
@@ -94,7 +104,8 @@
                         caption.lastChild.setAttribute("colspan", "6");
                         table.appendChild(caption);
                         caption.lastChild.appendChild(document.createTextNode(response['circuit'] + " - " + response['date']));
-
+                        
+                        // inizializzazione tempi e miglior giro
                         tempi = response['times'];
                         let best = Infinity;
 
@@ -116,15 +127,20 @@
                             table.lastChild.lastChild.appendChild(document.createTextNode(heads[i]));
                         }
 
+                        // per ogni tempo
                         for (let i = 0; i < tempi.length; i++) {
                             table.appendChild(document.createElement("tr"));
+                            // per ogni tempo totale e settore
                             for (let j = 0; j < tempi[i].length; j++) {
                                 table.lastChild.appendChild(document.createElement("td"));
                                 if(j == 0)
+                                    // nome della moto
                                     table.lastChild.lastChild.appendChild(document.createTextNode(tempi[i][j]));
                                 else {
+                                    // tempo totale o settore
                                     table.lastChild.lastChild.appendChild(document.createTextNode(parseMillis(tempi[i][j])));
                                     if(tempi[i][1] == best)
+                                        // evidenzio la prima colonna della riga per segnare il miglior tempo
                                         table.lastChild.firstChild.setAttribute("class", "best");
                                 }
                             }

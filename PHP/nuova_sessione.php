@@ -36,14 +36,18 @@
                 session_start();
             }
 
+            isLogged();
+
             try{
                 $pdo = connect();
                 
+                // recupero i circuiti
                 $sql = "SELECT nome FROM circuito";
                 $set = $pdo->query($sql);
                 if($set->rowCount() < 1)
                     throw new Exception();
                 
+                // inserisco i circuiti all'interno di un menu a tendina
                 echo "<select name='selezione_circuito' id='circuito'>";        
                 echo "<option>Seleziona Circuito</option>";
                 while($record = $set->fetch()){
@@ -51,16 +55,20 @@
                 }
                 echo "</select>";
         
+                // recupero le moto
                 $sql = "SELECT marca, modello FROM archiviomoto";
                 $set = $pdo->query($sql);
                 if($set->rowCount() < 1)
                     throw new Exception();
                 
+                // inserisco le moto all'interno di un menu a tendina
                 echo "<select name='selezione_moto' id='moto'>";
                 echo "<option>Seleziona Moto</option>";        
                 while($record = $set->fetch()){
                     echo "<option>".$record["marca"]." ".$record["modello"]."</option>";
                 }
+                // la categoria "Altro..." indica che il pilota non guida una moto
+                // standard e rientra tra i prototipi
                 echo "<option>Altro...</option>";
                 echo "</select>";
                 
@@ -100,6 +108,7 @@
                         document.getElementById("errDiv").hidden = true;
                         const tempi = response['tempi'];
                         const moto = response['moto'];
+                        // inizializzazione migliori tempi e settori
                         let best = Infinity;
                         let bestSectors = new Array(4);
                         bestSectors[0] = Infinity;
@@ -118,8 +127,10 @@
                             bestSectors[2] = (tempi[i][3] < bestSectors[2]) ? tempi[i][3] : bestSectors[2];
                             bestSectors[3] = (tempi[i][4] < bestSectors[3]) ? tempi[i][4] : bestSectors[3];
                         }
+                        // composizione tempo ideale
                         const idealTime = bestSectors[0] + bestSectors[1] + bestSectors[2] + bestSectors[3]; 
 
+                        // risultato visibile
                         let table = document.getElementById("res");
                         let heads = new Array(
                             "Tempo",
@@ -147,7 +158,9 @@
                         // stampa i tempi
                         for(let i = 0; i < tempi.length; i++){
                             table.appendChild(document.createElement("tr"));
+                            // per ogni tempo
                             for(let j = 0; j < tempi[i].length; j++){
+                                // creo le colonne del tempo totale e dei settori
                                 table.lastChild.appendChild(document.createElement("td"));
                                 table.lastChild.lastChild.appendChild(document.createTextNode(parseMillis(tempi[i][j])));
                                 if(tempi[i][0] == best)
@@ -190,6 +203,10 @@
                 x.send(data);
             }
 
+            /**
+             * Converte il tempo passato per argomento da epoch al formato "mm:ss:ddd"
+             * @returns string
+             */
             function parseMillis(millis){
                 min = 0;
                 sec = 0;

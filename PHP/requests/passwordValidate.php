@@ -5,24 +5,28 @@
         session_start();
 
         $user = $_SESSION["user"];
-        $answer = $_POST["answer"];
+        $answer = strtolower($_POST["answer"]);
         $psw = $_POST["psw"];
         $re_psw = $_POST["re_psw"];
 
         $pdo = connect();
 
+        // recupero la risposta dell'utente
         $query = "SELECT risposta
                     FROM utente
                     WHERE username = \"$user\"";
         $record = $pdo->query($query);
         $r = $record->fetch();
 
+        // se la risposta e' sbagliata
         if($r["risposta"] != $answer)
             throw new Exception(1);
         
+        // se le pasword non coincidono
         if($psw != $re_psw)
             throw new Exception(2);
         
+        // aggiorno il record dell'utente
         $sql = "UPDATE utente
                 SET `password` = ?
                 WHERE username = ?";

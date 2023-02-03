@@ -47,6 +47,7 @@
 
                 $pdo = connect();
 
+                // recupero i circuiti
                 $sql = "SELECT C.nome
                         FROM circuito C
                         GROUP BY C.nome";
@@ -57,11 +58,13 @@
                     $i++;
                 }
 
+                // display dell'interfaccia
                 echo "<h1 style='display: inline;'>Storico tempi di $user</h1>";
                 echo "</div>";
                 echo "<input style='margin-bottom: 1%; margin-top: 1%;' type='button' onclick='location.href=\"menu.php\"' value='Indietro'>";
                 echo "<div class='container'>";
                 for ($i = 0; $i < count($circuiti); $i++){
+                    // per ogni circuito recupero i dati relativi all'utente
                     $sql = "SELECT moto, `data`, t_lap, t_s1, t_s2, t_s3, t_s4 
                             FROM tempo
                             WHERE pilota = \"$user\"
@@ -69,6 +72,7 @@
                             ORDER BY `data`, circuito";
                     $set = $pdo->query($sql);
                     if ($set->rowCount() < 1)
+                        // se non vi sono dati per un circuito, viene saltato
                         continue;
                     echo "<table class='gridItem'>";
                     echo "<tr><td class='caption' colspan='7'>$circuiti[$i]</td></tr>";

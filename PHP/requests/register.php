@@ -4,6 +4,7 @@ require '..\files\utility.php';
 try {
     $pdo = connect();
 
+    // campi mancanti
     if(empty($_POST["user"]) || empty($_POST["pswd"]) || empty($_POST["re_pswd"]) || empty($_POST["mail"]) || ($_POST["question"] === "Scegli...")
         || empty($_POST["answer"]))
         throw new Exception("Dati richiesti!", 2);
@@ -13,11 +14,13 @@ try {
     $re_pswd = $_POST["re_pswd"];
     $mail = $_POST["mail"];
     $question = $_POST["question"];
-    $answer = $_POST["answer"];
+    $answer = strtolower($_POST["answer"]);
 
+    // controllo che le password siano uguali
     if(!password_verify($re_pswd, $pswd))
         throw new Exception("Le password non coincidono!", 0);
 
+    // controllo se il nome utente e' disponibile
     $query = "SELECT username FROM utente";
     $record = $pdo->query($query);
 
@@ -25,6 +28,7 @@ try {
         if(($user === $r["username"]))
             throw new Exception("Nome utente non disponibile!", 1);
     
+    // registro l'utente
     $sql = "INSERT INTO utente VALUES(?, ?, ?, ?, ?)";
     $statement = $pdo->prepare($sql);
     $statement->bindValue(1, $user);
