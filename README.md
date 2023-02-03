@@ -43,7 +43,7 @@
                     <li>
                         <p>
                             Il sito &egrave; realizzato con l'intento di ricevere, registrare, analizzare e comparare i tempi dei giri effettuati
-                            dai piloti di motociclette in alcuni <br>
+                            dai piloti di motociclette in alcuni
                             circuiti italiani, un elenco dei quali pu&ograve; essere osservato navigando in esso.
                         </p>
                     </li>
@@ -69,7 +69,7 @@
                             La registrazione &egrave; molto semplice, dalla home del sito se si vuole creare un nuovo account ci si dirige nella pagina di registrazione<br>
                             utilizzando l'apposito tasto.<br>
                             Si riempie il modulo a schermo con i propri dati, ricordando che <i>il nome utente pu&ograve; contentere solamente numeri e lettere</i><br>
-                            e <i>la password deve contenere almeno una lettere MAIUSCOLA e una MINUSCOLA, almeno un numero, e deve essere di lunghezza compresa<br>
+                            e <i>la password deve contenere almeno una lettere MAIUSCOLA e una MINUSCOLA, almeno un numero, e deve essere di lunghezza compresa
                             tra gli 8 e i 20 caratteri.</i><br>
                             Infine si sceglie una domanda tra quelle fornite e una risposta a scelta dell'utente per la procedura di recupero della password.
                         </p>
