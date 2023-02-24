@@ -125,6 +125,7 @@ CREATE TABLE `utente` (
 --
 
 LOCK TABLES `utente` WRITE;
+-- Password = Proviamo[numero doppo nome utente]
 /*!40000 ALTER TABLE `utente` DISABLE KEYS */;
 INSERT INTO `utente` VALUES ('Lorenzo11','$2y$10$0zWcEV56xoXuvcIVPxhcg.qgUDPd4akHX.HuFjqnMEBqvuapKH8RS','lorenzo.mail@example.it','Qual\' è il tuo colore preferito?','rosso'),('Luigi33','$2y$10$KSW.MEK1hzdZJAOOmRGUueM6Ux6ZI2xLHvMaqReoyF4z/3CLqsDKa','verdi.luigi@example.it','Qual\' è il nome del tuo amico immaginario da bambino?','gianni'),('Mario22','$2y$10$BD6JsHZPefBCE/y0GoXCHeM6LF/bhqxQvQOso7Lo4JgX7Idl524eK','rossi.mario@example.it','Qual\' è il primo esame che hai passato?','analisi'),('Toad44','$2y$10$rvYLv1qo/.Fo75pVBaySKeAuGhp30LPJHdo/zRIFa1zLIFL.Rcfli','gialli.toad@example.it','Qual\' è il nome del tuo amico immaginario da bambino?','mario');
 /*!40000 ALTER TABLE `utente` ENABLE KEYS */;
