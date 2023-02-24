@@ -2,6 +2,8 @@
 
 **Progetto a.a. 22/23 Progettazione web Ingegneria Informatica UniPi (voto: 29)**
 
+**Ho utilizzato ajax con il metodo XMLHTTPRequest, lui preferisce fetch() (anche se non ha rotto le scatole piu` di tanto a riguardo)**
+
 ----------
 
 <fieldset>
