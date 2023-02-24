@@ -4,6 +4,8 @@
 
 **Ho utilizzato ajax con il metodo XMLHTTPRequest, lui preferisce fetch() (anche se non ha rotto le scatole piu` di tanto a riguardo)**
 
+**Sostituire le credenziali del proprio DBMS nel file PHP/files/utility.php nella funzione connect()**
+
 ----------
 
 <fieldset>
