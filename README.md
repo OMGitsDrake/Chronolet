@@ -2,7 +2,7 @@
 
 **Progetto a.a. 22/23 Progettazione web Ingegneria Informatica UniPi (voto: 29)**
 
-**Ho utilizzato ajax con il metodo XMLHTTPRequest, lui preferisce fetch() (anche se non ha rotto le scatole piu` di tanto a riguardo)**
+**Ho utilizzato ajax con il metodo XMLHttpRequest, lui preferisce fetch() (anche se non ha rotto le scatole piu` di tanto a riguardo)**
 
 **Sostituire le credenziali del proprio DBMS nel file PHP/files/utility.php nella funzione connect()**
 
